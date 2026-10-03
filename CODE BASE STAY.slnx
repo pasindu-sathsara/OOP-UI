@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CODE BASE STAY/CODE BASE STAY.vcxproj" />
+</Solution>
