@@ -51,7 +51,7 @@ namespace CODEBASESTAY {
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->Login->ForeColor = System::Drawing::SystemColors::MenuText;
 			this->Login->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Login.Image")));
-			this->Login->Location = System::Drawing::Point(239, 412);
+			this->Login->Location = System::Drawing::Point(239, 365);
 			this->Login->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Login->Name = L"Login";
 			this->Login->Size = System::Drawing::Size(136, 46);

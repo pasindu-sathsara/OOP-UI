@@ -1,4 +1,5 @@
 #pragma once
+#include "Rooms.h"
 
 namespace CODEBASESTAY {
 
@@ -25,331 +26,395 @@ namespace CODEBASESTAY {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Panel^ panel1;
-	protected:
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::Label^ label7;
-	private: System::Windows::Forms::Panel^ panel3;
-	private: System::Windows::Forms::Label^ label9;
-	private: System::Windows::Forms::Label^ label10;
-	private: System::Windows::Forms::Panel^ panel4;
-	private: System::Windows::Forms::Label^ label11;
-	private: System::Windows::Forms::Label^ label12;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ GuestName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Room;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Amount;
-
-
-
-
-
-
 
 	private:
+		System::Windows::Forms::Panel^ panelSidebar;
+		System::Windows::Forms::Panel^ panelMainContent;
+
+		// Sidebar Buttons
+		System::Windows::Forms::Button^ btnDashboard;
+		System::Windows::Forms::Button^ btnRooms;
+		System::Windows::Forms::Button^ btnGuests;
+		System::Windows::Forms::Button^ btnLogout;
+
+		// Dashboard Screen Controls
+		System::Windows::Forms::Label^ lblWelcome;
+		System::Windows::Forms::Label^ lblAdmin;
+		System::Windows::Forms::Panel^ pnlTotalRooms;
+		System::Windows::Forms::Label^ lblTotalRoomsTitle;
+		System::Windows::Forms::Label^ lblTotalRoomsVal;
+		System::Windows::Forms::Panel^ pnlOccupiedRooms;
+		System::Windows::Forms::Label^ lblOccupiedRoomsTitle;
+		System::Windows::Forms::Label^ lblOccupiedRoomsVal;
+		System::Windows::Forms::Panel^ pnlTotalBookings;
+		System::Windows::Forms::Label^ lblTotalBookingsTitle;
+		System::Windows::Forms::Label^ lblTotalBookingsVal;
+		System::Windows::Forms::Panel^ pnlRecentBookings;
+		System::Windows::Forms::Label^ lblRecentTitle;
+		System::Windows::Forms::DataGridView^ dataGridView1;
+		System::Windows::Forms::DataGridViewTextBoxColumn^ GuestN;
+		System::Windows::Forms::DataGridViewTextBoxColumn^ Amount;
+		System::Windows::Forms::DataGridViewTextBoxColumn^ RoomCol;
+
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Dashboard::typeid));
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->label10 = (gcnew System::Windows::Forms::Label());
-			this->panel4 = (gcnew System::Windows::Forms::Panel());
-			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->panelSidebar = (gcnew System::Windows::Forms::Panel());
+			this->btnDashboard = (gcnew System::Windows::Forms::Button());
+			this->btnRooms = (gcnew System::Windows::Forms::Button());
+			this->btnGuests = (gcnew System::Windows::Forms::Button());
+			this->btnLogout = (gcnew System::Windows::Forms::Button());
+
+			this->lblWelcome = (gcnew System::Windows::Forms::Label());
+			this->lblAdmin = (gcnew System::Windows::Forms::Label());
+
+			this->panelMainContent = (gcnew System::Windows::Forms::Panel());
+			this->pnlTotalRooms = (gcnew System::Windows::Forms::Panel());
+			this->lblTotalRoomsVal = (gcnew System::Windows::Forms::Label());
+			this->lblTotalRoomsTitle = (gcnew System::Windows::Forms::Label());
+
+			this->pnlOccupiedRooms = (gcnew System::Windows::Forms::Panel());
+			this->lblOccupiedRoomsVal = (gcnew System::Windows::Forms::Label());
+			this->lblOccupiedRoomsTitle = (gcnew System::Windows::Forms::Label());
+
+			this->pnlTotalBookings = (gcnew System::Windows::Forms::Panel());
+			this->lblTotalBookingsVal = (gcnew System::Windows::Forms::Label());
+			this->lblTotalBookingsTitle = (gcnew System::Windows::Forms::Label());
+
+			this->pnlRecentBookings = (gcnew System::Windows::Forms::Panel());
+			this->lblRecentTitle = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->GuestName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Room = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->GuestN = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Amount = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->panel1->SuspendLayout();
-			this->panel2->SuspendLayout();
-			this->panel3->SuspendLayout();
-			this->panel4->SuspendLayout();
+			this->RoomCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+
+			this->panelSidebar->SuspendLayout();
+			this->panelMainContent->SuspendLayout();
+			this->pnlTotalRooms->SuspendLayout();
+			this->pnlOccupiedRooms->SuspendLayout();
+			this->pnlTotalBookings->SuspendLayout();
+			this->pnlRecentBookings->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
+
 			// 
-			// panel1
+			// panelSidebar
 			// 
-			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
-			this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->panel1->Controls->Add(this->label4);
-			this->panel1->Controls->Add(this->label3);
-			this->panel1->Controls->Add(this->label2);
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Location = System::Drawing::Point(-5, -7);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(220, 727);
-			this->panel1->TabIndex = 0;
+			this->panelSidebar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
+			this->panelSidebar->Controls->Add(this->btnDashboard);
+			this->panelSidebar->Controls->Add(this->btnRooms);
+			this->panelSidebar->Controls->Add(this->btnGuests);
+			this->panelSidebar->Controls->Add(this->btnLogout);
+			this->panelSidebar->Dock = System::Windows::Forms::DockStyle::Left;
+			this->panelSidebar->Location = System::Drawing::Point(0, 0);
+			this->panelSidebar->Name = L"panelSidebar";
+			this->panelSidebar->Size = System::Drawing::Size(260, 721);
+			this->panelSidebar->TabIndex = 0;
+
 			// 
-			// label1
+			// btnDashboard
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->label1->Location = System::Drawing::Point(54, 224);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(114, 28);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Dashboard";
-			this->label1->Click += gcnew System::EventHandler(this, &Dashboard::label1_Click);
+			this->btnDashboard->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnDashboard->FlatAppearance->BorderSize = 0;
+			this->btnDashboard->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnDashboard->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->btnDashboard->ForeColor = System::Drawing::Color::White;
+			this->btnDashboard->Location = System::Drawing::Point(15, 180);
+			this->btnDashboard->Name = L"btnDashboard";
+			this->btnDashboard->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
+			this->btnDashboard->Size = System::Drawing::Size(230, 55);
+			this->btnDashboard->TabIndex = 0;
+			this->btnDashboard->Text = L"Dashboard";
+			this->btnDashboard->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnDashboard->UseVisualStyleBackColor = true;
+
 			// 
-			// label2
+			// btnRooms
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(54, 311);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(67, 28);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"Room";
+			this->btnRooms->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnRooms->FlatAppearance->BorderSize = 0;
+			this->btnRooms->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnRooms->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->btnRooms->ForeColor = System::Drawing::Color::White;
+			this->btnRooms->Location = System::Drawing::Point(15, 255);
+			this->btnRooms->Name = L"btnRooms";
+			this->btnRooms->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
+			this->btnRooms->Size = System::Drawing::Size(230, 55);
+			this->btnRooms->TabIndex = 1;
+			this->btnRooms->Text = L"Rooms";
+			this->btnRooms->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnRooms->UseVisualStyleBackColor = true;
+			this->btnRooms->Click += gcnew System::EventHandler(this, &Dashboard::Rooms_Click);
+
 			// 
-			// label3
+			// btnGuests
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(54, 408);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(66, 28);
-			this->label3->TabIndex = 1;
-			this->label3->Text = L"Guest";
-			this->label3->Click += gcnew System::EventHandler(this, &Dashboard::label3_Click);
+			this->btnGuests->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnGuests->FlatAppearance->BorderSize = 0;
+			this->btnGuests->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnGuests->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->btnGuests->ForeColor = System::Drawing::Color::White;
+			this->btnGuests->Location = System::Drawing::Point(15, 330);
+			this->btnGuests->Name = L"btnGuests";
+			this->btnGuests->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
+			this->btnGuests->Size = System::Drawing::Size(230, 55);
+			this->btnGuests->TabIndex = 2;
+			this->btnGuests->Text = L"Guests";
+			this->btnGuests->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnGuests->UseVisualStyleBackColor = true;
+
 			// 
-			// label4
+			// btnLogout
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(54, 659);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(78, 28);
-			this->label4->TabIndex = 1;
-			this->label4->Text = L"Logout";
+			this->btnLogout->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnLogout->FlatAppearance->BorderSize = 0;
+			this->btnLogout->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnLogout->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->btnLogout->ForeColor = System::Drawing::Color::White;
+			this->btnLogout->Location = System::Drawing::Point(15, 630);
+			this->btnLogout->Name = L"btnLogout";
+			this->btnLogout->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
+			this->btnLogout->Size = System::Drawing::Size(230, 55);
+			this->btnLogout->TabIndex = 3;
+			this->btnLogout->Text = L"Logout";
+			this->btnLogout->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnLogout->UseVisualStyleBackColor = true;
+
 			// 
-			// label5
+			// lblWelcome
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label5->Location = System::Drawing::Point(231, 9);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(164, 27);
-			this->label5->TabIndex = 1;
-			this->label5->Text = L"Welcome Back !";
+			this->lblWelcome->AutoSize = true;
+			this->lblWelcome->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Bold));
+			this->lblWelcome->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(45)), static_cast<System::Int32>(static_cast<System::Byte>(75)), static_cast<System::Int32>(static_cast<System::Byte>(65)));
+			this->lblWelcome->Location = System::Drawing::Point(290, 25);
+			this->lblWelcome->Name = L"lblWelcome";
+			this->lblWelcome->Size = System::Drawing::Size(206, 41);
+			this->lblWelcome->TabIndex = 1;
+			this->lblWelcome->Text = L"Welcome Back !";
+
 			// 
-			// label6
+			// lblAdmin
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label6->Location = System::Drawing::Point(270, 36);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(79, 27);
-			this->label6->TabIndex = 2;
-			this->label6->Text = L"Admin";
-			this->label6->Click += gcnew System::EventHandler(this, &Dashboard::label6_Click);
+			this->lblAdmin->AutoSize = true;
+			this->lblAdmin->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Bold));
+			this->lblAdmin->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
+			this->lblAdmin->Location = System::Drawing::Point(292, 68);
+			this->lblAdmin->Name = L"lblAdmin";
+			this->lblAdmin->Size = System::Drawing::Size(71, 28);
+			this->lblAdmin->TabIndex = 2;
+			this->lblAdmin->Text = L"Admin";
+
 			// 
-			// panel2
+			// panelMainContent
 			// 
-			this->panel2->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->panel2->Controls->Add(this->label8);
-			this->panel2->Controls->Add(this->label7);
-			this->panel2->Location = System::Drawing::Point(280, 108);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(218, 149);
-			this->panel2->TabIndex = 3;
+			this->panelMainContent->Controls->Add(this->pnlTotalRooms);
+			this->panelMainContent->Controls->Add(this->pnlOccupiedRooms);
+			this->panelMainContent->Controls->Add(this->pnlTotalBookings);
+			this->panelMainContent->Controls->Add(this->pnlRecentBookings);
+			this->panelMainContent->Location = System::Drawing::Point(280, 115);
+			this->panelMainContent->Name = L"panelMainContent";
+			this->panelMainContent->Size = System::Drawing::Size(1040, 580);
+			this->panelMainContent->TabIndex = 3;
+
 			// 
-			// label7
+			// pnlTotalRooms
 			// 
-			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label7->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label7->Location = System::Drawing::Point(35, 24);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(160, 31);
-			this->label7->TabIndex = 0;
-			this->label7->Text = L"Total Rooms";
-			this->label7->Click += gcnew System::EventHandler(this, &Dashboard::label7_Click);
+			this->pnlTotalRooms->BackColor = System::Drawing::Color::White;
+			this->pnlTotalRooms->Controls->Add(this->lblTotalRoomsVal);
+			this->pnlTotalRooms->Controls->Add(this->lblTotalRoomsTitle);
+			this->pnlTotalRooms->Location = System::Drawing::Point(15, 15);
+			this->pnlTotalRooms->Name = L"pnlTotalRooms";
+			this->pnlTotalRooms->Size = System::Drawing::Size(315, 130);
+			this->pnlTotalRooms->TabIndex = 0;
+
 			// 
-			// label8
+			// lblTotalRoomsVal
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label8->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label8->Location = System::Drawing::Point(80, 68);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(48, 27);
-			this->label8->TabIndex = 1;
-			this->label8->Text = L"120";
+			this->lblTotalRoomsVal->AutoSize = true;
+			this->lblTotalRoomsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
+			this->lblTotalRoomsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
+			this->lblTotalRoomsVal->Location = System::Drawing::Point(20, 65);
+			this->lblTotalRoomsVal->Name = L"lblTotalRoomsVal";
+			this->lblTotalRoomsVal->Size = System::Drawing::Size(65, 37);
+			this->lblTotalRoomsVal->TabIndex = 1;
+			this->lblTotalRoomsVal->Text = L"120";
+
 			// 
-			// panel3
+			// lblTotalRoomsTitle
 			// 
-			this->panel3->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->panel3->Controls->Add(this->label9);
-			this->panel3->Controls->Add(this->label10);
-			this->panel3->Location = System::Drawing::Point(635, 108);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(218, 149);
-			this->panel3->TabIndex = 4;
+			this->lblTotalRoomsTitle->AutoSize = true;
+			this->lblTotalRoomsTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->lblTotalRoomsTitle->ForeColor = System::Drawing::Color::Gray;
+			this->lblTotalRoomsTitle->Location = System::Drawing::Point(20, 20);
+			this->lblTotalRoomsTitle->Name = L"lblTotalRoomsTitle";
+			this->lblTotalRoomsTitle->Size = System::Drawing::Size(127, 28);
+			this->lblTotalRoomsTitle->TabIndex = 0;
+			this->lblTotalRoomsTitle->Text = L"Total Rooms";
+
 			// 
-			// label9
+			// pnlOccupiedRooms
 			// 
-			this->label9->AutoSize = true;
-			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label9->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label9->Location = System::Drawing::Point(86, 68);
-			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(48, 27);
-			this->label9->TabIndex = 1;
-			this->label9->Text = L"120";
+			this->pnlOccupiedRooms->BackColor = System::Drawing::Color::White;
+			this->pnlOccupiedRooms->Controls->Add(this->lblOccupiedRoomsVal);
+			this->pnlOccupiedRooms->Controls->Add(this->lblOccupiedRoomsTitle);
+			this->pnlOccupiedRooms->Location = System::Drawing::Point(350, 15);
+			this->pnlOccupiedRooms->Name = L"pnlOccupiedRooms";
+			this->pnlOccupiedRooms->Size = System::Drawing::Size(315, 130);
+			this->pnlOccupiedRooms->TabIndex = 1;
+
 			// 
-			// label10
+			// lblOccupiedRoomsVal
 			// 
-			this->label10->AutoSize = true;
-			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label10->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label10->Location = System::Drawing::Point(6, 24);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(209, 31);
-			this->label10->TabIndex = 0;
-			this->label10->Text = L"Occupied Rooms";
+			this->lblOccupiedRoomsVal->AutoSize = true;
+			this->lblOccupiedRoomsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
+			this->lblOccupiedRoomsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
+			this->lblOccupiedRoomsVal->Location = System::Drawing::Point(20, 65);
+			this->lblOccupiedRoomsVal->Name = L"lblOccupiedRoomsVal";
+			this->lblOccupiedRoomsVal->Size = System::Drawing::Size(65, 37);
+			this->lblOccupiedRoomsVal->TabIndex = 1;
+			this->lblOccupiedRoomsVal->Text = L"120";
+
 			// 
-			// panel4
+			// lblOccupiedRoomsTitle
 			// 
-			this->panel4->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->panel4->Controls->Add(this->label11);
-			this->panel4->Controls->Add(this->label12);
-			this->panel4->Location = System::Drawing::Point(970, 108);
-			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(218, 149);
-			this->panel4->TabIndex = 5;
+			this->lblOccupiedRoomsTitle->AutoSize = true;
+			this->lblOccupiedRoomsTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->lblOccupiedRoomsTitle->ForeColor = System::Drawing::Color::Gray;
+			this->lblOccupiedRoomsTitle->Location = System::Drawing::Point(20, 20);
+			this->lblOccupiedRoomsTitle->Name = L"lblOccupiedRoomsTitle";
+			this->lblOccupiedRoomsTitle->Size = System::Drawing::Size(167, 28);
+			this->lblOccupiedRoomsTitle->TabIndex = 0;
+			this->lblOccupiedRoomsTitle->Text = L"Occupied Rooms";
+
 			// 
-			// label11
+			// pnlTotalBookings
 			// 
-			this->label11->AutoSize = true;
-			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label11->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label11->Location = System::Drawing::Point(80, 68);
-			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(48, 27);
-			this->label11->TabIndex = 1;
-			this->label11->Text = L"120";
+			this->pnlTotalBookings->BackColor = System::Drawing::Color::White;
+			this->pnlTotalBookings->Controls->Add(this->lblTotalBookingsVal);
+			this->pnlTotalBookings->Controls->Add(this->lblTotalBookingsTitle);
+			this->pnlTotalBookings->Location = System::Drawing::Point(685, 15);
+			this->pnlTotalBookings->Name = L"pnlTotalBookings";
+			this->pnlTotalBookings->Size = System::Drawing::Size(340, 130);
+			this->pnlTotalBookings->TabIndex = 2;
+
 			// 
-			// label12
+			// lblTotalBookingsVal
 			// 
-			this->label12->AutoSize = true;
-			this->label12->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label12->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->label12->Location = System::Drawing::Point(15, 24);
-			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(188, 31);
-			this->label12->TabIndex = 0;
-			this->label12->Text = L"Total Bookings";
+			this->lblTotalBookingsVal->AutoSize = true;
+			this->lblTotalBookingsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
+			this->lblTotalBookingsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
+			this->lblTotalBookingsVal->Location = System::Drawing::Point(20, 65);
+			this->lblTotalBookingsVal->Name = L"lblTotalBookingsVal";
+			this->lblTotalBookingsVal->Size = System::Drawing::Size(65, 37);
+			this->lblTotalBookingsVal->TabIndex = 1;
+			this->lblTotalBookingsVal->Text = L"120";
+
+			// 
+			// lblTotalBookingsTitle
+			// 
+			this->lblTotalBookingsTitle->AutoSize = true;
+			this->lblTotalBookingsTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->lblTotalBookingsTitle->ForeColor = System::Drawing::Color::Gray;
+			this->lblTotalBookingsTitle->Location = System::Drawing::Point(20, 20);
+			this->lblTotalBookingsTitle->Name = L"lblTotalBookingsTitle";
+			this->lblTotalBookingsTitle->Size = System::Drawing::Size(150, 28);
+			this->lblTotalBookingsTitle->TabIndex = 0;
+			this->lblTotalBookingsTitle->Text = L"Total Bookings";
+
+			// 
+			// pnlRecentBookings
+			// 
+			this->pnlRecentBookings->BackColor = System::Drawing::Color::White;
+			this->pnlRecentBookings->Controls->Add(this->lblRecentTitle);
+			this->pnlRecentBookings->Controls->Add(this->dataGridView1);
+			this->pnlRecentBookings->Location = System::Drawing::Point(15, 165);
+			this->pnlRecentBookings->Name = L"pnlRecentBookings";
+			this->pnlRecentBookings->Size = System::Drawing::Size(1010, 400);
+			this->pnlRecentBookings->TabIndex = 3;
+
+			// 
+			// lblRecentTitle
+			// 
+			this->lblRecentTitle->AutoSize = true;
+			this->lblRecentTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 13, System::Drawing::FontStyle::Bold));
+			this->lblRecentTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(45)), static_cast<System::Int32>(static_cast<System::Byte>(75)), static_cast<System::Int32>(static_cast<System::Byte>(65)));
+			this->lblRecentTitle->Location = System::Drawing::Point(20, 20);
+			this->lblRecentTitle->Name = L"lblRecentTitle";
+			this->lblRecentTitle->Size = System::Drawing::Size(184, 30);
+			this->lblRecentTitle->TabIndex = 0;
+			this->lblRecentTitle->Text = L"Recent Bookings";
+
 			// 
 			// dataGridView1
 			// 
-			this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)),
-				static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->dataGridView1->ColumnHeadersHeight = 40;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
-				this->GuestName,
-					this->Room, this->Amount
+			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			this->dataGridView1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array<System::Windows::Forms::DataGridViewColumn^>(3) {
+				this->GuestN, this->Amount, this->RoomCol
 			});
-			this->dataGridView1->Location = System::Drawing::Point(280, 378);
+			this->dataGridView1->Location = System::Drawing::Point(20, 70);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->ReadOnly = true;
+			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(713, 281);
-			this->dataGridView1->TabIndex = 6;
+			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dataGridView1->Size = System::Drawing::Size(970, 310);
+			this->dataGridView1->TabIndex = 1;
+
 			// 
-			// GuestName
+			// GuestN
 			// 
-			this->GuestName->HeaderText = L"Guest Name";
-			this->GuestName->MinimumWidth = 6;
-			this->GuestName->Name = L"GuestName";
-			this->GuestName->Width = 125;
-			// 
-			// Room
-			// 
-			this->Room->HeaderText = L"Room";
-			this->Room->MinimumWidth = 6;
-			this->Room->Name = L"Room";
-			this->Room->Width = 125;
+			this->GuestN->HeaderText = L"Guest Name";
+			this->GuestN->MinimumWidth = 6;
+			this->GuestN->Name = L"GuestN";
+			this->GuestN->ReadOnly = true;
+
 			// 
 			// Amount
 			// 
 			this->Amount->HeaderText = L"Amount";
 			this->Amount->MinimumWidth = 6;
 			this->Amount->Name = L"Amount";
-			this->Amount->Width = 125;
+			this->Amount->ReadOnly = true;
+
+			// 
+			// RoomCol
+			// 
+			this->RoomCol->HeaderText = L"Room";
+			this->RoomCol->MinimumWidth = 6;
+			this->RoomCol->Name = L"RoomCol";
+			this->RoomCol->ReadOnly = true;
+
 			// 
 			// Dashboard
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(11, 28);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Gainsboro;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(245)), static_cast<System::Int32>(static_cast<System::Byte>(247)), static_cast<System::Int32>(static_cast<System::Byte>(246)));
 			this->ClientSize = System::Drawing::Size(1348, 721);
-			this->Controls->Add(this->dataGridView1);
-			this->Controls->Add(this->panel4);
-			this->Controls->Add(this->panel3);
-			this->Controls->Add(this->panel2);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->panelMainContent);
+			this->Controls->Add(this->lblAdmin);
+			this->Controls->Add(this->lblWelcome);
+			this->Controls->Add(this->panelSidebar);
+			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
 			this->MaximizeBox = false;
 			this->Name = L"Dashboard";
-			this->Text = L"Dashboard";
-			this->Load += gcnew System::EventHandler(this, &Dashboard::Dashboard_Load);
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
-			this->panel2->ResumeLayout(false);
-			this->panel2->PerformLayout();
-			this->panel3->ResumeLayout(false);
-			this->panel3->PerformLayout();
-			this->panel4->ResumeLayout(false);
-			this->panel4->PerformLayout();
+			this->Text = L"Dashboard - Code Base StaySync";
+			this->panelSidebar->ResumeLayout(false);
+			this->panelMainContent->ResumeLayout(false);
+			this->pnlTotalRooms->ResumeLayout(false);
+			this->pnlTotalRooms->PerformLayout();
+			this->pnlOccupiedRooms->ResumeLayout(false);
+			this->pnlOccupiedRooms->PerformLayout();
+			this->pnlTotalBookings->ResumeLayout(false);
+			this->pnlTotalBookings->PerformLayout();
+			this->pnlRecentBookings->ResumeLayout(false);
+			this->pnlRecentBookings->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -357,17 +422,17 @@ namespace CODEBASESTAY {
 		}
 #pragma endregion
 
-	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private:
+		System::Void Rooms_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Loads your MyForm (Rooms) inside the main window panel seamlessly
+			CODEBASESTAY::MyForm^ roomsForm = gcnew CODEBASESTAY::MyForm();
+			roomsForm->TopLevel = false;
+			roomsForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			roomsForm->Dock = System::Windows::Forms::DockStyle::Fill;
+
+			this->panelMainContent->Controls->Clear();
+			this->panelMainContent->Controls->Add(roomsForm);
+			roomsForm->Show();
+		}
+	};
 }
