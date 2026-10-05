@@ -424,15 +424,15 @@ namespace CODEBASESTAY {
 
 	private:
 		System::Void Rooms_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Loads your MyForm (Rooms) inside the main window panel seamlessly
 			CODEBASESTAY::MyForm^ roomsForm = gcnew CODEBASESTAY::MyForm();
-			roomsForm->TopLevel = false;
-			roomsForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			roomsForm->Dock = System::Windows::Forms::DockStyle::Fill;
 
-			this->panelMainContent->Controls->Clear();
-			this->panelMainContent->Controls->Add(roomsForm);
-			roomsForm->Show();
+			// 2. Match the exact location and size of your current dashboard window
+			roomsForm->StartPosition = FormStartPosition::Manual;
+			roomsForm->Location = this->Location;
+
+			// 3. Show the Rooms window and pass 'this' as the owner, then hide Dashboard
+			roomsForm->Show(this);
+			this->Hide();
 		}
 	};
 }
