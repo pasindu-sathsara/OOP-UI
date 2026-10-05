@@ -17,7 +17,7 @@ namespace CODEBASESTAY {
 		{
 			InitializeComponent();
 
-			// Automatically focus on the username textbox when form loads
+			// Automatically focus on username when the form opens
 			this->ActiveControl = textBox1;
 		}
 
@@ -51,32 +51,15 @@ namespace CODEBASESTAY {
 			System::ComponentModel::ComponentResourceManager^ resources =
 				(gcnew System::ComponentModel::ComponentResourceManager(MyForm2::typeid));
 
-			this->panel1 =
-				(gcnew System::Windows::Forms::Panel());
-
-			this->errorLabel =
-				(gcnew System::Windows::Forms::Label());
-
-			this->button2 =
-				(gcnew System::Windows::Forms::Button());
-
-			this->button1 =
-				(gcnew System::Windows::Forms::Button());
-
-			this->textBox2 =
-				(gcnew System::Windows::Forms::TextBox());
-
-			this->textBox1 =
-				(gcnew System::Windows::Forms::TextBox());
-
-			this->label3 =
-				(gcnew System::Windows::Forms::Label());
-
-			this->label2 =
-				(gcnew System::Windows::Forms::Label());
-
-			this->label1 =
-				(gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->errorLabel = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -84,7 +67,6 @@ namespace CODEBASESTAY {
 			// 
 			// panel1
 			// 
-
 			this->panel1->Controls->Add(this->errorLabel);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->button1);
@@ -93,20 +75,14 @@ namespace CODEBASESTAY {
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
 
-			this->panel1->Location =
-				System::Drawing::Point(171, 210);
-
+			this->panel1->Location = System::Drawing::Point(171, 210);
 			this->panel1->Name = L"panel1";
-
-			this->panel1->Size =
-				System::Drawing::Size(308, 250);
-
+			this->panel1->Size = System::Drawing::Size(308, 250);
 			this->panel1->TabIndex = 0;
 
 			// 
 			// errorLabel
 			// 
-
 			this->errorLabel->AutoSize = true;
 
 			this->errorLabel->Font =
@@ -115,8 +91,7 @@ namespace CODEBASESTAY {
 					9,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->errorLabel->ForeColor =
 				System::Drawing::Color::Crimson;
@@ -124,8 +99,7 @@ namespace CODEBASESTAY {
 			this->errorLabel->Location =
 				System::Drawing::Point(24, 170);
 
-			this->errorLabel->Name =
-				L"errorLabel";
+			this->errorLabel->Name = L"errorLabel";
 
 			this->errorLabel->Size =
 				System::Drawing::Size(226, 19);
@@ -140,13 +114,11 @@ namespace CODEBASESTAY {
 			this->errorLabel->Click +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::errorLabel_Click
-				);
+					&MyForm2::errorLabel_Click);
 
 			// 
-			// button2
+			// button2 - Show / Hide Password
 			// 
-
 			this->button2->Cursor =
 				System::Windows::Forms::Cursors::Hand;
 
@@ -159,8 +131,7 @@ namespace CODEBASESTAY {
 					9,
 					System::Drawing::FontStyle::Regular,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->button2->Location =
 				System::Drawing::Point(187, 128);
@@ -179,13 +150,11 @@ namespace CODEBASESTAY {
 			this->button2->Click +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::button2_Click
-				);
+					&MyForm2::button2_Click);
 
 			// 
-			// button1
+			// button1 - Login
 			// 
-
 			this->button1->Cursor =
 				System::Windows::Forms::Cursors::Hand;
 
@@ -195,8 +164,7 @@ namespace CODEBASESTAY {
 					10.8F,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->button1->ForeColor =
 				System::Drawing::Color::Navy;
@@ -218,21 +186,18 @@ namespace CODEBASESTAY {
 			this->button1->Click +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::button1_Click
-				);
+					&MyForm2::button1_Click);
 
 			// 
-			// textBox2
+			// textBox2 - Password
 			// 
-
 			this->textBox2->Font =
 				(gcnew System::Drawing::Font(
 					L"Bookman Old Style",
 					10.8F,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->textBox2->Location =
 				System::Drawing::Point(28, 128);
@@ -249,27 +214,23 @@ namespace CODEBASESTAY {
 			this->textBox2->TextChanged +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::textBox2_TextChanged
-				);
+					&MyForm2::textBox2_TextChanged);
 
 			this->textBox2->KeyDown +=
 				gcnew System::Windows::Forms::KeyEventHandler(
 					this,
-					&MyForm2::textBox2_KeyDown
-				);
+					&MyForm2::textBox2_KeyDown);
 
 			// 
-			// textBox1
+			// textBox1 - Username
 			// 
-
 			this->textBox1->Font =
 				(gcnew System::Drawing::Font(
 					L"Bookman Old Style",
 					10.8F,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->textBox1->Location =
 				System::Drawing::Point(28, 51);
@@ -286,19 +247,16 @@ namespace CODEBASESTAY {
 			this->textBox1->TextChanged +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::textBox1_TextChanged_1
-				);
+					&MyForm2::textBox1_TextChanged_1);
 
 			this->textBox1->KeyDown +=
 				gcnew System::Windows::Forms::KeyEventHandler(
 					this,
-					&MyForm2::textBox1_KeyDown
-				);
+					&MyForm2::textBox1_KeyDown);
 
 			// 
-			// label3
+			// label3 - Password
 			// 
-
 			this->label3->AutoSize = true;
 
 			this->label3->Font =
@@ -307,8 +265,7 @@ namespace CODEBASESTAY {
 					12,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->label3->ForeColor =
 				System::Drawing::SystemColors::Desktop;
@@ -328,13 +285,11 @@ namespace CODEBASESTAY {
 			this->label3->Click +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::label3_Click
-				);
+					&MyForm2::label3_Click);
 
 			// 
-			// label2
+			// label2 - Username
 			// 
-
 			this->label2->AutoSize = true;
 
 			this->label2->Font =
@@ -343,8 +298,7 @@ namespace CODEBASESTAY {
 					12,
 					System::Drawing::FontStyle::Bold,
 					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+					static_cast<System::Byte>(0)));
 
 			this->label2->ForeColor =
 				System::Drawing::SystemColors::Desktop;
@@ -362,25 +316,22 @@ namespace CODEBASESTAY {
 			this->label2->Text = L"Username";
 
 			// 
-			// label1
+			// label1 - Login Page
 			// 
-
 			this->label1->AutoSize = true;
 
 			this->label1->BackColor =
 				System::Drawing::Color::Transparent;
 
-			this->label1->Font =
-				(gcnew System::Drawing::Font(
-					L"Constantia",
-					16.2F,
-					static_cast<System::Drawing::FontStyle>(
-						System::Drawing::FontStyle::Bold |
-						System::Drawing::FontStyle::Italic
-						),
-					System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)
-				));
+			// FIXED FONT LINE
+			this->label1->Font = (gcnew System::Drawing::Font(
+				L"Constantia",
+				16.2F,
+				static_cast<System::Drawing::FontStyle>(
+					(System::Drawing::FontStyle::Bold |
+						System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 
 			this->label1->ForeColor =
 				System::Drawing::SystemColors::WindowFrame;
@@ -395,8 +346,7 @@ namespace CODEBASESTAY {
 
 			this->label1->TabIndex = 0;
 
-			this->label1->Text =
-				L"Login Page";
+			this->label1->Text = L"Login Page";
 
 			this->label1->TextAlign =
 				System::Drawing::ContentAlignment::MiddleCenter;
@@ -404,13 +354,11 @@ namespace CODEBASESTAY {
 			this->label1->Click +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::label1_Click
-				);
+					&MyForm2::label1_Click);
 
 			// 
 			// MyForm2
 			// 
-
 			this->AutoScaleDimensions =
 				System::Drawing::SizeF(8, 16);
 
@@ -420,8 +368,7 @@ namespace CODEBASESTAY {
 			this->BackgroundImage =
 				(cli::safe_cast<System::Drawing::Image^>(
 					resources->GetObject(
-						L"$this.BackgroundImage"
-					)));
+						L"$this.BackgroundImage")));
 
 			this->BackgroundImageLayout =
 				System::Windows::Forms::ImageLayout::Stretch;
@@ -442,8 +389,7 @@ namespace CODEBASESTAY {
 			this->Load +=
 				gcnew System::EventHandler(
 					this,
-					&MyForm2::MyForm2_Load
-				);
+					&MyForm2::MyForm2_Load);
 
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
@@ -475,6 +421,7 @@ namespace CODEBASESTAY {
 		{
 		}
 
+		// Press Enter in username box -> move to password
 	private:
 		System::Void textBox1_KeyDown(
 			System::Object^ sender,
@@ -486,9 +433,11 @@ namespace CODEBASESTAY {
 				textBox2->Focus();
 
 				e->SuppressKeyPress = true;
+				e->Handled = true;
 			}
 		}
 
+		// Press Enter in password box -> login
 	private:
 		System::Void textBox2_KeyDown(
 			System::Object^ sender,
@@ -500,23 +449,25 @@ namespace CODEBASESTAY {
 				button1->PerformClick();
 
 				e->SuppressKeyPress = true;
+				e->Handled = true;
 			}
 		}
 
+		// LOGIN BUTTON
 	private:
 		System::Void button1_Click(
 			System::Object^ sender,
 			System::EventArgs^ e)
 		{
-			// USERNAME = user
-			// PASSWORD = 123
+			// Username: user
+			// Password: 123
 
 			if (textBox1->Text == L"user" &&
 				textBox2->Text == L"123")
 			{
 				errorLabel->Visible = false;
 
-				// Hide login form
+				// Hide login
 				this->Hide();
 
 				// Open Dashboard
@@ -525,7 +476,7 @@ namespace CODEBASESTAY {
 
 				dashboardForm->ShowDialog();
 
-				// Close login form after Dashboard closes
+				// Close login after dashboard closes
 				this->Close();
 			}
 			else
@@ -535,11 +486,12 @@ namespace CODEBASESTAY {
 				// Clear password
 				textBox2->Clear();
 
-				// Focus password box
+				// Focus password textbox
 				textBox2->Focus();
 			}
 		}
 
+		// SHOW / HIDE PASSWORD BUTTON
 	private:
 		System::Void button2_Click(
 			System::Object^ sender,
@@ -547,29 +499,28 @@ namespace CODEBASESTAY {
 		{
 			if (textBox2->PasswordChar == '*')
 			{
-				// Show password
 				textBox2->PasswordChar = '\0';
 
 				button2->Text = L"Hide";
 			}
 			else
 			{
-				// Hide password
 				textBox2->PasswordChar = '*';
 
 				button2->Text = L"Show";
 			}
 		}
 
+		// Hide error while username is being changed
 	private:
 		System::Void textBox1_TextChanged_1(
 			System::Object^ sender,
 			System::EventArgs^ e)
 		{
-			// Hide error when typing username
 			errorLabel->Visible = false;
 		}
 
+		// Hide error while password is being changed
 	private:
 		System::Void textBox2_TextChanged(
 			System::Object^ sender,

@@ -16,6 +16,8 @@ namespace CODEBASESTAY {
 		Dashboard(void)
 		{
 			InitializeComponent();
+			// Set initial active highlight on Dashboard button
+			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
 		}
 
 	protected:
@@ -35,20 +37,20 @@ namespace CODEBASESTAY {
 		System::Windows::Forms::Button^ btnDashboard;
 		System::Windows::Forms::Button^ btnRooms;
 		System::Windows::Forms::Button^ btnGuests;
-		System::Windows::Forms::Button^ btnLogout;
+
 
 		// Dashboard Screen Controls
 		System::Windows::Forms::Label^ lblWelcome;
 		System::Windows::Forms::Label^ lblAdmin;
 		System::Windows::Forms::Panel^ pnlTotalRooms;
 		System::Windows::Forms::Label^ lblTotalRoomsTitle;
-		System::Windows::Forms::Label^ lblTotalRoomsVal;
+
 		System::Windows::Forms::Panel^ pnlOccupiedRooms;
 		System::Windows::Forms::Label^ lblOccupiedRoomsTitle;
-		System::Windows::Forms::Label^ lblOccupiedRoomsVal;
+
 		System::Windows::Forms::Panel^ pnlTotalBookings;
 		System::Windows::Forms::Label^ lblTotalBookingsTitle;
-		System::Windows::Forms::Label^ lblTotalBookingsVal;
+
 		System::Windows::Forms::Panel^ pnlRecentBookings;
 		System::Windows::Forms::Label^ lblRecentTitle;
 		System::Windows::Forms::DataGridView^ dataGridView1;
@@ -65,18 +67,14 @@ namespace CODEBASESTAY {
 			this->btnDashboard = (gcnew System::Windows::Forms::Button());
 			this->btnRooms = (gcnew System::Windows::Forms::Button());
 			this->btnGuests = (gcnew System::Windows::Forms::Button());
-			this->btnLogout = (gcnew System::Windows::Forms::Button());
 			this->lblWelcome = (gcnew System::Windows::Forms::Label());
 			this->lblAdmin = (gcnew System::Windows::Forms::Label());
 			this->panelMainContent = (gcnew System::Windows::Forms::Panel());
 			this->pnlTotalRooms = (gcnew System::Windows::Forms::Panel());
-			this->lblTotalRoomsVal = (gcnew System::Windows::Forms::Label());
 			this->lblTotalRoomsTitle = (gcnew System::Windows::Forms::Label());
 			this->pnlOccupiedRooms = (gcnew System::Windows::Forms::Panel());
-			this->lblOccupiedRoomsVal = (gcnew System::Windows::Forms::Label());
 			this->lblOccupiedRoomsTitle = (gcnew System::Windows::Forms::Label());
 			this->pnlTotalBookings = (gcnew System::Windows::Forms::Panel());
-			this->lblTotalBookingsVal = (gcnew System::Windows::Forms::Label());
 			this->lblTotalBookingsTitle = (gcnew System::Windows::Forms::Label());
 			this->pnlRecentBookings = (gcnew System::Windows::Forms::Panel());
 			this->lblRecentTitle = (gcnew System::Windows::Forms::Label());
@@ -100,7 +98,6 @@ namespace CODEBASESTAY {
 			this->panelSidebar->Controls->Add(this->btnDashboard);
 			this->panelSidebar->Controls->Add(this->btnRooms);
 			this->panelSidebar->Controls->Add(this->btnGuests);
-			this->panelSidebar->Controls->Add(this->btnLogout);
 			this->panelSidebar->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panelSidebar->Location = System::Drawing::Point(0, 0);
 			this->panelSidebar->Name = L"panelSidebar";
@@ -122,6 +119,7 @@ namespace CODEBASESTAY {
 			this->btnDashboard->Text = L"Dashboard";
 			this->btnDashboard->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnDashboard->UseVisualStyleBackColor = true;
+			this->btnDashboard->Click += gcnew System::EventHandler(this, &Dashboard::btnDashboard_Click);
 			// 
 			// btnRooms
 			// 
@@ -155,22 +153,6 @@ namespace CODEBASESTAY {
 			this->btnGuests->Text = L"Guests";
 			this->btnGuests->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnGuests->UseVisualStyleBackColor = true;
-			// 
-			// btnLogout
-			// 
-			this->btnLogout->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btnLogout->FlatAppearance->BorderSize = 0;
-			this->btnLogout->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnLogout->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
-			this->btnLogout->ForeColor = System::Drawing::Color::White;
-			this->btnLogout->Location = System::Drawing::Point(15, 630);
-			this->btnLogout->Name = L"btnLogout";
-			this->btnLogout->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
-			this->btnLogout->Size = System::Drawing::Size(230, 55);
-			this->btnLogout->TabIndex = 3;
-			this->btnLogout->Text = L"Logout";
-			this->btnLogout->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->btnLogout->UseVisualStyleBackColor = true;
 			// 
 			// lblWelcome
 			// 
@@ -210,24 +192,11 @@ namespace CODEBASESTAY {
 			// pnlTotalRooms
 			// 
 			this->pnlTotalRooms->BackColor = System::Drawing::Color::White;
-			this->pnlTotalRooms->Controls->Add(this->lblTotalRoomsVal);
 			this->pnlTotalRooms->Controls->Add(this->lblTotalRoomsTitle);
 			this->pnlTotalRooms->Location = System::Drawing::Point(15, 15);
 			this->pnlTotalRooms->Name = L"pnlTotalRooms";
 			this->pnlTotalRooms->Size = System::Drawing::Size(315, 130);
 			this->pnlTotalRooms->TabIndex = 0;
-			// 
-			// lblTotalRoomsVal
-			// 
-			this->lblTotalRoomsVal->AutoSize = true;
-			this->lblTotalRoomsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
-			this->lblTotalRoomsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)), static_cast<System::Int32>(static_cast<System::Byte>(107)),
-				static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->lblTotalRoomsVal->Location = System::Drawing::Point(20, 65);
-			this->lblTotalRoomsVal->Name = L"lblTotalRoomsVal";
-			this->lblTotalRoomsVal->Size = System::Drawing::Size(65, 37);
-			this->lblTotalRoomsVal->TabIndex = 1;
-			this->lblTotalRoomsVal->Text = L"120";
 			// 
 			// lblTotalRoomsTitle
 			// 
@@ -243,24 +212,11 @@ namespace CODEBASESTAY {
 			// pnlOccupiedRooms
 			// 
 			this->pnlOccupiedRooms->BackColor = System::Drawing::Color::White;
-			this->pnlOccupiedRooms->Controls->Add(this->lblOccupiedRoomsVal);
 			this->pnlOccupiedRooms->Controls->Add(this->lblOccupiedRoomsTitle);
 			this->pnlOccupiedRooms->Location = System::Drawing::Point(350, 15);
 			this->pnlOccupiedRooms->Name = L"pnlOccupiedRooms";
 			this->pnlOccupiedRooms->Size = System::Drawing::Size(315, 130);
 			this->pnlOccupiedRooms->TabIndex = 1;
-			// 
-			// lblOccupiedRoomsVal
-			// 
-			this->lblOccupiedRoomsVal->AutoSize = true;
-			this->lblOccupiedRoomsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
-			this->lblOccupiedRoomsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)),
-				static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->lblOccupiedRoomsVal->Location = System::Drawing::Point(20, 65);
-			this->lblOccupiedRoomsVal->Name = L"lblOccupiedRoomsVal";
-			this->lblOccupiedRoomsVal->Size = System::Drawing::Size(65, 37);
-			this->lblOccupiedRoomsVal->TabIndex = 1;
-			this->lblOccupiedRoomsVal->Text = L"120";
 			// 
 			// lblOccupiedRoomsTitle
 			// 
@@ -276,24 +232,11 @@ namespace CODEBASESTAY {
 			// pnlTotalBookings
 			// 
 			this->pnlTotalBookings->BackColor = System::Drawing::Color::White;
-			this->pnlTotalBookings->Controls->Add(this->lblTotalBookingsVal);
 			this->pnlTotalBookings->Controls->Add(this->lblTotalBookingsTitle);
 			this->pnlTotalBookings->Location = System::Drawing::Point(685, 15);
 			this->pnlTotalBookings->Name = L"pnlTotalBookings";
 			this->pnlTotalBookings->Size = System::Drawing::Size(340, 130);
 			this->pnlTotalBookings->TabIndex = 2;
-			// 
-			// lblTotalBookingsVal
-			// 
-			this->lblTotalBookingsVal->AutoSize = true;
-			this->lblTotalBookingsVal->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
-			this->lblTotalBookingsVal->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(76)),
-				static_cast<System::Int32>(static_cast<System::Byte>(107)), static_cast<System::Int32>(static_cast<System::Byte>(93)));
-			this->lblTotalBookingsVal->Location = System::Drawing::Point(20, 65);
-			this->lblTotalBookingsVal->Name = L"lblTotalBookingsVal";
-			this->lblTotalBookingsVal->Size = System::Drawing::Size(65, 37);
-			this->lblTotalBookingsVal->TabIndex = 1;
-			this->lblTotalBookingsVal->Text = L"120";
 			// 
 			// lblTotalBookingsTitle
 			// 
@@ -404,7 +347,26 @@ namespace CODEBASESTAY {
 #pragma endregion
 
 	private:
+		System::Void btnDashboard_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Highlight Dashboard button and reset others
+			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
+			this->btnRooms->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+			this->btnGuests->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+
+			// Restore original dashboard panels back into panelMainContent
+			this->panelMainContent->Controls->Clear();
+			this->panelMainContent->Controls->Add(this->pnlTotalRooms);
+			this->panelMainContent->Controls->Add(this->pnlOccupiedRooms);
+			this->panelMainContent->Controls->Add(this->pnlTotalBookings);
+			this->panelMainContent->Controls->Add(this->pnlRecentBookings);
+		}
+
 		System::Void Rooms_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Highlight the Rooms button and reset others
+			this->btnRooms->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
+			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+			this->btnGuests->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+
 			// Seamlessly load the MyForm (Rooms) inside the main window's content panel
 			CODEBASESTAY::MyForm^ roomsForm = gcnew CODEBASESTAY::MyForm();
 			roomsForm->TopLevel = false;
@@ -415,7 +377,9 @@ namespace CODEBASESTAY {
 			this->panelMainContent->Controls->Add(roomsForm);
 			roomsForm->Show();
 		}
-	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
-};
+
+	private:
+		System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
+		}
+	};
 }
