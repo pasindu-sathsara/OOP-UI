@@ -147,6 +147,9 @@
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Guest.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Rooms.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -160,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Guest.resx">
+      <DependentUpon>Guest.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rooms.resx">
       <DependentUpon>Rooms.h</DependentUpon>

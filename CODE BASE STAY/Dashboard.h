@@ -1,5 +1,6 @@
 #pragma once
 #include "Rooms.h"
+#include "Guest.h" 
 
 namespace CODEBASESTAY {
 
@@ -37,7 +38,7 @@ namespace CODEBASESTAY {
 		System::Windows::Forms::Button^ btnDashboard;
 		System::Windows::Forms::Button^ btnRooms;
 		System::Windows::Forms::Button^ btnGuests;
-
+		System::Windows::Forms::Button^ btnLogout;
 
 		// Dashboard Screen Controls
 		System::Windows::Forms::Label^ lblWelcome;
@@ -67,6 +68,7 @@ namespace CODEBASESTAY {
 			this->btnDashboard = (gcnew System::Windows::Forms::Button());
 			this->btnRooms = (gcnew System::Windows::Forms::Button());
 			this->btnGuests = (gcnew System::Windows::Forms::Button());
+			this->btnLogout = (gcnew System::Windows::Forms::Button());
 			this->lblWelcome = (gcnew System::Windows::Forms::Label());
 			this->lblAdmin = (gcnew System::Windows::Forms::Label());
 			this->panelMainContent = (gcnew System::Windows::Forms::Panel());
@@ -98,6 +100,7 @@ namespace CODEBASESTAY {
 			this->panelSidebar->Controls->Add(this->btnDashboard);
 			this->panelSidebar->Controls->Add(this->btnRooms);
 			this->panelSidebar->Controls->Add(this->btnGuests);
+			this->panelSidebar->Controls->Add(this->btnLogout);
 			this->panelSidebar->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panelSidebar->Location = System::Drawing::Point(0, 0);
 			this->panelSidebar->Name = L"panelSidebar";
@@ -153,6 +156,24 @@ namespace CODEBASESTAY {
 			this->btnGuests->Text = L"Guests";
 			this->btnGuests->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnGuests->UseVisualStyleBackColor = true;
+			this->btnGuests->Click += gcnew System::EventHandler(this, &Dashboard::btnGuests_Click);
+			// 
+			// btnLogout
+			// 
+			this->btnLogout->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnLogout->FlatAppearance->BorderSize = 0;
+			this->btnLogout->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnLogout->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold));
+			this->btnLogout->ForeColor = System::Drawing::Color::White;
+			this->btnLogout->Location = System::Drawing::Point(15, 630);
+			this->btnLogout->Name = L"btnLogout";
+			this->btnLogout->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
+			this->btnLogout->Size = System::Drawing::Size(230, 55);
+			this->btnLogout->TabIndex = 3;
+			this->btnLogout->Text = L"Logout";
+			this->btnLogout->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btnLogout->UseVisualStyleBackColor = true;
+			this->btnLogout->Click += gcnew System::EventHandler(this, &Dashboard::btnLogout_Click);
 			// 
 			// lblWelcome
 			// 
@@ -348,12 +369,10 @@ namespace CODEBASESTAY {
 
 	private:
 		System::Void btnDashboard_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Highlight Dashboard button and reset others
 			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
 			this->btnRooms->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
 			this->btnGuests->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
 
-			// Restore original dashboard panels back into panelMainContent
 			this->panelMainContent->Controls->Clear();
 			this->panelMainContent->Controls->Add(this->pnlTotalRooms);
 			this->panelMainContent->Controls->Add(this->pnlOccupiedRooms);
@@ -362,12 +381,10 @@ namespace CODEBASESTAY {
 		}
 
 		System::Void Rooms_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Highlight the Rooms button and reset others
 			this->btnRooms->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
 			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
 			this->btnGuests->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
 
-			// Seamlessly load the MyForm (Rooms) inside the main window's content panel
 			CODEBASESTAY::MyForm^ roomsForm = gcnew CODEBASESTAY::MyForm();
 			roomsForm->TopLevel = false;
 			roomsForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -376,6 +393,25 @@ namespace CODEBASESTAY {
 			this->panelMainContent->Controls->Clear();
 			this->panelMainContent->Controls->Add(roomsForm);
 			roomsForm->Show();
+		}
+
+		System::Void btnGuests_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->btnGuests->BackColor = System::Drawing::Color::FromArgb(50, 80, 70);
+			this->btnDashboard->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+			this->btnRooms->BackColor = System::Drawing::Color::FromArgb(76, 107, 93);
+
+			CODEBASESTAY::MyForm1^ guestForm = gcnew CODEBASESTAY::MyForm1();
+			guestForm->TopLevel = false;
+			guestForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			guestForm->Dock = System::Windows::Forms::DockStyle::Fill;
+
+			this->panelMainContent->Controls->Clear();
+			this->panelMainContent->Controls->Add(guestForm);
+			guestForm->Show();
+		}
+
+		System::Void btnLogout_Click(System::Object^ sender, System::EventArgs^ e) {
+			Application::Exit();
 		}
 
 	private:
