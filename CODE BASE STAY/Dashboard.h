@@ -153,7 +153,7 @@ namespace CODEBASESTAY {
 			this->btnGuests->Padding = System::Windows::Forms::Padding(15, 0, 0, 0);
 			this->btnGuests->Size = System::Drawing::Size(230, 55);
 			this->btnGuests->TabIndex = 2;
-			this->btnGuests->Text = L"Guests";
+			this->btnGuests->Text = L"Booking";
 			this->btnGuests->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->btnGuests->UseVisualStyleBackColor = true;
 			this->btnGuests->Click += gcnew System::EventHandler(this, &Dashboard::btnGuests_Click);
