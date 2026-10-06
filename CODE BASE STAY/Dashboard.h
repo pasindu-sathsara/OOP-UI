@@ -1,6 +1,6 @@
 #pragma once
 #include "Rooms.h"
-#include "Guest.h" 
+#include "Booking.h" 
 
 namespace CODEBASESTAY {
 

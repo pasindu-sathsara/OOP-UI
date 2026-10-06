@@ -281,6 +281,7 @@ namespace CODEBASESTAY {
 			   // textBox2
 			   // 
 			   this->textBox2->Location = System::Drawing::Point(201, 130);
+			   this->textBox2->MaxLength = 10;
 			   this->textBox2->Name = L"textBox2";
 			   this->textBox2->Size = System::Drawing::Size(190, 30);
 			   this->textBox2->TabIndex = 6;
@@ -290,6 +291,7 @@ namespace CODEBASESTAY {
 			   // textBox1
 			   // 
 			   this->textBox1->Location = System::Drawing::Point(201, 70);
+			   this->textBox1->MaxLength = 5;
 			   this->textBox1->Name = L"textBox1";
 			   this->textBox1->Size = System::Drawing::Size(190, 30);
 			   this->textBox1->TabIndex = 5;
@@ -427,7 +429,7 @@ namespace CODEBASESTAY {
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->AutoScroll = true;
 			   this->BackColor = System::Drawing::Color::Gainsboro;
-			   this->ClientSize = System::Drawing::Size(1064, 533);
+			   this->ClientSize = System::Drawing::Size(878, 533);
 			   this->Controls->Add(this->pnlRoomList);
 			   this->Controls->Add(this->pnlRoomDetails);
 			   this->Controls->Add(this->pnlTotalRooms);
