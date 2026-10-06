@@ -76,25 +76,25 @@ namespace CODEBASESTAY {
 			   this->pnlTotalBookings = (gcnew System::Windows::Forms::Panel());
 			   this->lblTotalBookingsTitle = (gcnew System::Windows::Forms::Label());
 			   this->pnlRoomDetails = (gcnew System::Windows::Forms::Panel());
+			   this->btnClear = (gcnew System::Windows::Forms::Button());
+			   this->btnDelete = (gcnew System::Windows::Forms::Button());
+			   this->btnUpdate = (gcnew System::Windows::Forms::Button());
+			   this->btnAddRoom = (gcnew System::Windows::Forms::Button());
+			   this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			   this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			   this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			   this->label6 = (gcnew System::Windows::Forms::Label());
 			   this->label5 = (gcnew System::Windows::Forms::Label());
 			   this->label4 = (gcnew System::Windows::Forms::Label());
 			   this->label3 = (gcnew System::Windows::Forms::Label());
 			   this->label2 = (gcnew System::Windows::Forms::Label());
-			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			   this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			   this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			   this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
-			   this->btnAddRoom = (gcnew System::Windows::Forms::Button());
-			   this->btnUpdate = (gcnew System::Windows::Forms::Button());
-			   this->btnDelete = (gcnew System::Windows::Forms::Button());
-			   this->btnClear = (gcnew System::Windows::Forms::Button());
 			   this->pnlRoomList = (gcnew System::Windows::Forms::Panel());
-			   this->label7 = (gcnew System::Windows::Forms::Label());
 			   this->dgvRooms = (gcnew System::Windows::Forms::DataGridView());
 			   this->Type = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			   this->Price = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			   this->Stt = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			   this->label7 = (gcnew System::Windows::Forms::Label());
 			   this->pnlTotalRooms->SuspendLayout();
 			   this->pnlOccupiedRooms->SuspendLayout();
 			   this->pnlTotalBookings->SuspendLayout();
@@ -109,7 +109,7 @@ namespace CODEBASESTAY {
 			   this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->label1->ForeColor = System::Drawing::Color::DarkGreen;
-			   this->label1->Location = System::Drawing::Point(21, 9);
+			   this->label1->Location = System::Drawing::Point(12, 9);
 			   this->label1->Name = L"label1";
 			   this->label1->Size = System::Drawing::Size(277, 38);
 			   this->label1->TabIndex = 0;
@@ -119,9 +119,9 @@ namespace CODEBASESTAY {
 			   // 
 			   this->pnlTotalRooms->BackColor = System::Drawing::Color::White;
 			   this->pnlTotalRooms->Controls->Add(this->lblTotalRoomsTitle);
-			   this->pnlTotalRooms->Location = System::Drawing::Point(152, 74);
+			   this->pnlTotalRooms->Location = System::Drawing::Point(21, 53);
 			   this->pnlTotalRooms->Name = L"pnlTotalRooms";
-			   this->pnlTotalRooms->Size = System::Drawing::Size(315, 68);
+			   this->pnlTotalRooms->Size = System::Drawing::Size(230, 68);
 			   this->pnlTotalRooms->TabIndex = 3;
 			   // 
 			   // lblTotalRoomsTitle
@@ -139,9 +139,9 @@ namespace CODEBASESTAY {
 			   // 
 			   this->pnlOccupiedRooms->BackColor = System::Drawing::Color::White;
 			   this->pnlOccupiedRooms->Controls->Add(this->lblOccupiedRoomsTitle);
-			   this->pnlOccupiedRooms->Location = System::Drawing::Point(487, 74);
+			   this->pnlOccupiedRooms->Location = System::Drawing::Point(301, 53);
 			   this->pnlOccupiedRooms->Name = L"pnlOccupiedRooms";
-			   this->pnlOccupiedRooms->Size = System::Drawing::Size(315, 68);
+			   this->pnlOccupiedRooms->Size = System::Drawing::Size(230, 68);
 			   this->pnlOccupiedRooms->TabIndex = 4;
 			   // 
 			   // lblOccupiedRoomsTitle
@@ -159,9 +159,9 @@ namespace CODEBASESTAY {
 			   // 
 			   this->pnlTotalBookings->BackColor = System::Drawing::Color::White;
 			   this->pnlTotalBookings->Controls->Add(this->lblTotalBookingsTitle);
-			   this->pnlTotalBookings->Location = System::Drawing::Point(822, 74);
+			   this->pnlTotalBookings->Location = System::Drawing::Point(592, 53);
 			   this->pnlTotalBookings->Name = L"pnlTotalBookings";
-			   this->pnlTotalBookings->Size = System::Drawing::Size(340, 68);
+			   this->pnlTotalBookings->Size = System::Drawing::Size(230, 68);
 			   this->pnlTotalBookings->TabIndex = 5;
 			   // 
 			   // lblTotalBookingsTitle
@@ -194,10 +194,106 @@ namespace CODEBASESTAY {
 			   this->pnlRoomDetails->Cursor = System::Windows::Forms::Cursors::Hand;
 			   this->pnlRoomDetails->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->pnlRoomDetails->Location = System::Drawing::Point(117, 175);
+			   this->pnlRoomDetails->Location = System::Drawing::Point(21, 127);
 			   this->pnlRoomDetails->Name = L"pnlRoomDetails";
-			   this->pnlRoomDetails->Size = System::Drawing::Size(1010, 270);
+			   this->pnlRoomDetails->Size = System::Drawing::Size(801, 270);
 			   this->pnlRoomDetails->TabIndex = 6;
+			   // 
+			   // btnClear
+			   // 
+			   this->btnClear->BackColor = System::Drawing::Color::LightSlateGray;
+			   this->btnClear->Cursor = System::Windows::Forms::Cursors::Hand;
+			   this->btnClear->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btnClear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btnClear->Location = System::Drawing::Point(660, 190);
+			   this->btnClear->Name = L"btnClear";
+			   this->btnClear->Size = System::Drawing::Size(111, 36);
+			   this->btnClear->TabIndex = 12;
+			   this->btnClear->Text = L"Clear";
+			   this->btnClear->UseVisualStyleBackColor = false;
+			   this->btnClear->Click += gcnew System::EventHandler(this, &MyForm::btnClear_Click);
+			   // 
+			   // btnDelete
+			   // 
+			   this->btnDelete->BackColor = System::Drawing::Color::Firebrick;
+			   this->btnDelete->Cursor = System::Windows::Forms::Cursors::Hand;
+			   this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btnDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btnDelete->Location = System::Drawing::Point(469, 190);
+			   this->btnDelete->Name = L"btnDelete";
+			   this->btnDelete->Size = System::Drawing::Size(111, 36);
+			   this->btnDelete->TabIndex = 11;
+			   this->btnDelete->Text = L"Delete";
+			   this->btnDelete->UseVisualStyleBackColor = false;
+			   // 
+			   // btnUpdate
+			   // 
+			   this->btnUpdate->BackColor = System::Drawing::Color::LightGreen;
+			   this->btnUpdate->Cursor = System::Windows::Forms::Cursors::Hand;
+			   this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btnUpdate->Location = System::Drawing::Point(280, 190);
+			   this->btnUpdate->Name = L"btnUpdate";
+			   this->btnUpdate->Size = System::Drawing::Size(111, 36);
+			   this->btnUpdate->TabIndex = 10;
+			   this->btnUpdate->Text = L"Update";
+			   this->btnUpdate->UseVisualStyleBackColor = false;
+			   // 
+			   // btnAddRoom
+			   // 
+			   this->btnAddRoom->BackColor = System::Drawing::Color::DarkGreen;
+			   this->btnAddRoom->Cursor = System::Windows::Forms::Cursors::Hand;
+			   this->btnAddRoom->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btnAddRoom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btnAddRoom->Location = System::Drawing::Point(73, 190);
+			   this->btnAddRoom->Name = L"btnAddRoom";
+			   this->btnAddRoom->Size = System::Drawing::Size(111, 36);
+			   this->btnAddRoom->TabIndex = 9;
+			   this->btnAddRoom->Text = L"Add Room";
+			   this->btnAddRoom->UseVisualStyleBackColor = false;
+			   // 
+			   // comboBox2
+			   // 
+			   this->comboBox2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			   this->comboBox2->FormattingEnabled = true;
+			   this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Available", L"Occupied" });
+			   this->comboBox2->Location = System::Drawing::Point(581, 125);
+			   this->comboBox2->Name = L"comboBox2";
+			   this->comboBox2->Size = System::Drawing::Size(190, 31);
+			   this->comboBox2->TabIndex = 8;
+			   this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox2_SelectedIndexChanged);
+			   // 
+			   // comboBox1
+			   // 
+			   this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			   this->comboBox1->FormattingEnabled = true;
+			   this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Single", L"Double ", L"Suite" });
+			   this->comboBox1->Location = System::Drawing::Point(581, 67);
+			   this->comboBox1->Name = L"comboBox1";
+			   this->comboBox1->Size = System::Drawing::Size(190, 31);
+			   this->comboBox1->TabIndex = 7;
+			   this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox1_SelectedIndexChanged);
+			   // 
+			   // textBox2
+			   // 
+			   this->textBox2->Location = System::Drawing::Point(201, 130);
+			   this->textBox2->Name = L"textBox2";
+			   this->textBox2->Size = System::Drawing::Size(190, 30);
+			   this->textBox2->TabIndex = 6;
+			   this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
+			   this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Enter);
+			   // 
+			   // textBox1
+			   // 
+			   this->textBox1->Location = System::Drawing::Point(201, 70);
+			   this->textBox1->Name = L"textBox1";
+			   this->textBox1->Size = System::Drawing::Size(190, 30);
+			   this->textBox1->TabIndex = 5;
+			   this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::Enter);
 			   // 
 			   // label6
 			   // 
@@ -259,120 +355,15 @@ namespace CODEBASESTAY {
 			   this->label2->Text = L"Room Details";
 			   this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
 			   // 
-			   // textBox1
-			   // 
-			   this->textBox1->Location = System::Drawing::Point(201, 70);
-			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(190, 30);
-			   this->textBox1->TabIndex = 5;
-			   // 
-			   // textBox2
-			   // 
-			   this->textBox2->Location = System::Drawing::Point(201, 130);
-			   this->textBox2->Name = L"textBox2";
-			   this->textBox2->Size = System::Drawing::Size(190, 30);
-			   this->textBox2->TabIndex = 6;
-			   this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
-			   // 
-			   // comboBox1
-			   // 
-			   this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			   this->comboBox1->FormattingEnabled = true;
-			   this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Single", L"Double ", L"Suite" });
-			   this->comboBox1->Location = System::Drawing::Point(581, 67);
-			   this->comboBox1->Name = L"comboBox1";
-			   this->comboBox1->Size = System::Drawing::Size(190, 31);
-			   this->comboBox1->TabIndex = 7;
-			   this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox1_SelectedIndexChanged);
-			   // 
-			   // comboBox2
-			   // 
-			   this->comboBox2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			   this->comboBox2->FormattingEnabled = true;
-			   this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Available", L"Occupied" });
-			   this->comboBox2->Location = System::Drawing::Point(581, 125);
-			   this->comboBox2->Name = L"comboBox2";
-			   this->comboBox2->Size = System::Drawing::Size(190, 31);
-			   this->comboBox2->TabIndex = 8;
-			   this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox2_SelectedIndexChanged);
-			   // 
-			   // btnAddRoom
-			   // 
-			   this->btnAddRoom->BackColor = System::Drawing::Color::DarkGreen;
-			   this->btnAddRoom->Cursor = System::Windows::Forms::Cursors::Hand;
-			   this->btnAddRoom->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btnAddRoom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btnAddRoom->Location = System::Drawing::Point(73, 190);
-			   this->btnAddRoom->Name = L"btnAddRoom";
-			   this->btnAddRoom->Size = System::Drawing::Size(111, 36);
-			   this->btnAddRoom->TabIndex = 9;
-			   this->btnAddRoom->Text = L"Add Room";
-			   this->btnAddRoom->UseVisualStyleBackColor = false;
-			   // 
-			   // btnUpdate
-			   // 
-			   this->btnUpdate->BackColor = System::Drawing::Color::LightGreen;
-			   this->btnUpdate->Cursor = System::Windows::Forms::Cursors::Hand;
-			   this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btnUpdate->Location = System::Drawing::Point(280, 190);
-			   this->btnUpdate->Name = L"btnUpdate";
-			   this->btnUpdate->Size = System::Drawing::Size(111, 36);
-			   this->btnUpdate->TabIndex = 10;
-			   this->btnUpdate->Text = L"Update";
-			   this->btnUpdate->UseVisualStyleBackColor = false;
-			   // 
-			   // btnDelete
-			   // 
-			   this->btnDelete->BackColor = System::Drawing::Color::Firebrick;
-			   this->btnDelete->Cursor = System::Windows::Forms::Cursors::Hand;
-			   this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btnDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btnDelete->Location = System::Drawing::Point(469, 190);
-			   this->btnDelete->Name = L"btnDelete";
-			   this->btnDelete->Size = System::Drawing::Size(111, 36);
-			   this->btnDelete->TabIndex = 11;
-			   this->btnDelete->Text = L"Delete";
-			   this->btnDelete->UseVisualStyleBackColor = false;
-			   // 
-			   // btnClear
-			   // 
-			   this->btnClear->BackColor = System::Drawing::Color::LightSlateGray;
-			   this->btnClear->Cursor = System::Windows::Forms::Cursors::Hand;
-			   this->btnClear->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btnClear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btnClear->Location = System::Drawing::Point(660, 190);
-			   this->btnClear->Name = L"btnClear";
-			   this->btnClear->Size = System::Drawing::Size(111, 36);
-			   this->btnClear->TabIndex = 12;
-			   this->btnClear->Text = L"Clear";
-			   this->btnClear->UseVisualStyleBackColor = false;
-			   // 
 			   // pnlRoomList
 			   // 
 			   this->pnlRoomList->BackColor = System::Drawing::Color::White;
 			   this->pnlRoomList->Controls->Add(this->dgvRooms);
 			   this->pnlRoomList->Controls->Add(this->label7);
-			   this->pnlRoomList->Location = System::Drawing::Point(117, 463);
+			   this->pnlRoomList->Location = System::Drawing::Point(21, 403);
 			   this->pnlRoomList->Name = L"pnlRoomList";
-			   this->pnlRoomList->Size = System::Drawing::Size(1010, 288);
+			   this->pnlRoomList->Size = System::Drawing::Size(801, 288);
 			   this->pnlRoomList->TabIndex = 7;
-			   // 
-			   // label7
-			   // 
-			   this->label7->AutoSize = true;
-			   this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->label7->ForeColor = System::Drawing::Color::DarkGreen;
-			   this->label7->Location = System::Drawing::Point(12, 25);
-			   this->label7->Name = L"label7";
-			   this->label7->Size = System::Drawing::Size(90, 23);
-			   this->label7->TabIndex = 0;
-			   this->label7->Text = L"Room List";
 			   // 
 			   // dgvRooms
 			   // 
@@ -393,7 +384,7 @@ namespace CODEBASESTAY {
 			   this->dgvRooms->RowHeadersWidth = 51;
 			   this->dgvRooms->RowTemplate->Height = 24;
 			   this->dgvRooms->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			   this->dgvRooms->Size = System::Drawing::Size(907, 201);
+			   this->dgvRooms->Size = System::Drawing::Size(720, 201);
 			   this->dgvRooms->TabIndex = 1;
 			   this->dgvRooms->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dgvRooms_CellContentClick);
 			   // 
@@ -418,12 +409,25 @@ namespace CODEBASESTAY {
 			   this->Stt->Name = L"Stt";
 			   this->Stt->ReadOnly = true;
 			   // 
+			   // label7
+			   // 
+			   this->label7->AutoSize = true;
+			   this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->label7->ForeColor = System::Drawing::Color::DarkGreen;
+			   this->label7->Location = System::Drawing::Point(12, 25);
+			   this->label7->Name = L"label7";
+			   this->label7->Size = System::Drawing::Size(106, 28);
+			   this->label7->TabIndex = 0;
+			   this->label7->Text = L"Room List";
+			   // 
 			   // MyForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			   this->AutoScroll = true;
 			   this->BackColor = System::Drawing::Color::Gainsboro;
-			   this->ClientSize = System::Drawing::Size(1348, 721);
+			   this->ClientSize = System::Drawing::Size(1064, 533);
 			   this->Controls->Add(this->pnlRoomList);
 			   this->Controls->Add(this->pnlRoomDetails);
 			   this->Controls->Add(this->pnlTotalRooms);
@@ -431,7 +435,6 @@ namespace CODEBASESTAY {
 			   this->Controls->Add(this->pnlTotalBookings);
 			   this->Controls->Add(this->label1);
 			   this->Name = L"MyForm";
-			   this->Text = L"Rooms";
 			   this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			   this->pnlTotalRooms->ResumeLayout(false);
 			   this->pnlTotalRooms->PerformLayout();
@@ -476,6 +479,34 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void dgvRooms_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
+private: System::Void btnClear_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->textBox1->Clear();
+	this->textBox2->Clear();
+
+	// Reset your dropdowns using their exact designer names
+	this->comboBox1->SelectedIndex = -1;
+	this->comboBox1->Text = "";
+
+	this->comboBox2->SelectedIndex = -1;
+	this->comboBox2->Text = "";
+
+	// Return cursor focus back to the first text box
+	this->textBox1->Focus();
+}
+
+private: System::Void Enter(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	TextBox^ txt = dynamic_cast<TextBox^>(sender);
+
+	// Allow digits, control keys, and a decimal point
+	if (!Char::IsDigit(e->KeyChar) && !Char::IsControl(e->KeyChar) && e->KeyChar != '.') {
+		e->Handled = true;
+	}
+
+	// Prevent typing more than one decimal point
+	if (e->KeyChar == '.' && txt->Text->Contains(".")) {
+		e->Handled = true;
+	}
 }
 };
 }
