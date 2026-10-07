@@ -68,8 +68,9 @@ namespace CODEBASESTAY {
 					price,
 					comboBox2->SelectedItem->ToString()->Trim());
 
-				MessageBox::Show("Room saved successfully!");
 				LoadRooms();
+				MessageBox::Show("Room saved successfully!");
+				
 			}
 			catch (MySql::Data::MySqlClient::MySqlException^ ex)
 			{

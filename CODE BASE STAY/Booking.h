@@ -984,13 +984,13 @@ namespace CODEBASESTAY
 						roomNumber,
 						dateTimePicker1->Value,
 						dateTimePicker2->Value);
+				
+				LoadBookings();
 
 				MessageBox::Show(
 					System::String::Format(
 						"Booking saved successfully!\nBooking ID: {0}",
 						bookingId));
-
-				LoadBookings();
 
 				ClearFields();
 			}
