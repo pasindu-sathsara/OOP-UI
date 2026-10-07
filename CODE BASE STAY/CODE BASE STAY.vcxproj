@@ -87,6 +87,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)database.config" "$(TargetDir)database.config"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Manifest>
@@ -99,6 +102,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)database.config" "$(TargetDir)database.config"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Manifest>
@@ -115,6 +121,9 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)database.config" "$(TargetDir)database.config"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Manifest>
@@ -127,6 +136,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)database.config" "$(TargetDir)database.config"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
@@ -153,6 +165,7 @@
     <ClInclude Include="Booking.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="DatabaseConfig.h" />
     <ClInclude Include="HotelService.h" />
     <ClInclude Include="Rooms.h">
       <FileType>CppForm</FileType>

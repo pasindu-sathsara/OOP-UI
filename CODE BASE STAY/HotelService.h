@@ -1,4 +1,5 @@
 #pragma once
+#include "DatabaseConfig.h"
 
 using namespace System;
 using namespace MySql::Data::MySqlClient;
@@ -10,17 +11,9 @@ namespace CODEBASESTAY {
     public:
         String^ TestConnection()
         {
-            MySqlConnectionStringBuilder^ settings =
-                gcnew MySqlConnectionStringBuilder();
-
-            settings->Server = "127.0.0.1";
-            settings->Port = 3306;
-            settings->Database = "hotelmanagement_sys";
-            settings->UserID = "root";
-            settings->Password = "root";
-
             MySqlConnection^ connection =
-                gcnew MySqlConnection(settings->ConnectionString);
+                gcnew MySqlConnection(
+                    DatabaseConfig::GetConnectionString());
 
             try
             {
@@ -52,17 +45,9 @@ namespace CODEBASESTAY {
     void AddRoom(int roomNumber, String^ roomType,
         Decimal price, String^ status)
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -106,17 +91,9 @@ namespace CODEBASESTAY {
     bool UpdateRoom(int roomNumber, String^ roomType,
         Decimal price, String^ status)
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -158,17 +135,9 @@ namespace CODEBASESTAY {
 
     bool DeleteRoom(int roomNumber)
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -198,17 +167,9 @@ namespace CODEBASESTAY {
 
     System::Data::DataTable^ GetRooms()
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -256,17 +217,9 @@ namespace CODEBASESTAY {
             throw gcnew Exception(
                 "Enter a valid room number and a checkout date after check-in.");
 
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -371,17 +324,9 @@ namespace CODEBASESTAY {
 
     System::Data::DataTable^ GetBookings()
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -419,17 +364,9 @@ namespace CODEBASESTAY {
 
     array<int>^ GetDashboardCounts()
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {
@@ -473,17 +410,9 @@ namespace CODEBASESTAY {
 
     System::Data::DataTable^ GetRecentBookings()
     {
-        MySqlConnectionStringBuilder^ settings =
-            gcnew MySqlConnectionStringBuilder();
-
-        settings->Server = "127.0.0.1";
-        settings->Port = 3306;
-        settings->Database = "hotelmanagement_sys";
-        settings->UserID = "root";
-        settings->Password = "root";
-
         MySqlConnection^ connection =
-            gcnew MySqlConnection(settings->ConnectionString);
+            gcnew MySqlConnection(
+                DatabaseConfig::GetConnectionString());
 
         try
         {

@@ -41,5 +41,11 @@
     <ClInclude Include="Booking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HotelService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DatabaseConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
