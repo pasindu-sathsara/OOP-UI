@@ -69,6 +69,7 @@ namespace CODEBASESTAY {
 					comboBox2->SelectedItem->ToString()->Trim());
 
 				MessageBox::Show("Room saved successfully!");
+				LoadRooms();
 			}
 			catch (MySql::Data::MySqlClient::MySqlException^ ex)
 			{
@@ -181,6 +182,7 @@ namespace CODEBASESTAY {
 					textBox2->Clear();
 					comboBox1->SelectedIndex = -1;
 					comboBox2->SelectedIndex = -1;
+					LoadRooms();
 				}
 				else
 				{
@@ -212,6 +214,17 @@ namespace CODEBASESTAY {
 			{
 				HotelService^ backend = gcnew HotelService();
 				System::Data::DataTable^ rooms = backend->GetRooms();
+
+				array<int>^ counts = backend->GetDashboardCounts();
+
+				lblTotalRoomsTitle->Text =
+					String::Format("Total Rooms: {0}", counts[0]);
+
+				lblOccupiedRoomsTitle->Text =
+					String::Format("Occupied Rooms: {0}", counts[1]);
+
+				lblTotalBookingsTitle->Text =
+					String::Format("Total Bookings: {0}", counts[2]);
 
 				dgvRooms->DataSource = nullptr;
 				dgvRooms->Columns->Clear();
