@@ -329,10 +329,10 @@ namespace CODEBASESTAY {
                 command->Parameters->Clear();
                 command->CommandText =
                     "INSERT INTO reservation "
-                    "(guest_id, room_id, pacage_id, numberOfnigths, "
+                    "(guest_id, room_id, numberOfnigths, "
                     "total_amount, status, check_in, check_out) "
-                    "VALUES (@guest, @room, NULL, @nights, "
-                    "@total, 'Confirmed', @in, @out)";
+                    "VALUES (@guest, @room, @nights, @total, "
+                    "'Confirmed', @in, @out)";
 
                 command->Parameters->AddWithValue("@guest", guestId);
                 command->Parameters->AddWithValue("@room", roomNumber);
