@@ -10,466 +10,35 @@ namespace CODEBASESTAY
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
 	public:
-
 		MyForm1(void)
 		{
 			InitializeComponent();
 
-			// Book button
-			button1->Click +=
+			this->button1->Click +=
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::Book_Click);
 
-
-			// Automatically calculate total
-			// when room number changes
-			textBox4->TextChanged +=
+			this->textBox4->TextChanged +=
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::BookingDetailsChanged);
 
-
-			// Automatically calculate total
-			// when check-in changes
-			dateTimePicker1->ValueChanged +=
+			this->dateTimePicker1->ValueChanged +=
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::BookingDetailsChanged);
 
-
-			// Automatically calculate total
-			// when check-out changes
-			dateTimePicker2->ValueChanged +=
+			this->dateTimePicker2->ValueChanged +=
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::BookingDetailsChanged);
 		}
-
-
-	private:
-
-		// =====================================================
-		// BOOK BUTTON
-		// =====================================================
-
-		System::Void Book_Click(
-			System::Object^ sender,
-			System::EventArgs^ e)
-		{
-			int roomNumber;
-
-
-			if (!System::Int32::TryParse(
-				textBox4->Text,
-				roomNumber)
-				||
-				roomNumber <= 0)
-			{
-				MessageBox::Show(
-					"Enter a valid room number.");
-
-				return;
-			}
-
-
-			try
-			{
-				HotelService^ backend =
-					gcnew HotelService();
-
-
-				int bookingId =
-					backend->CreateBooking(
-
-						textBox1->Text,
-
-						textBox2->Text,
-
-						textBox3->Text,
-
-						roomNumber,
-
-						dateTimePicker1->Value,
-
-						dateTimePicker2->Value
-					);
-
-
-				MessageBox::Show(
-					System::String::Format(
-
-						"Booking saved successfully!\n"
-						"Booking ID: {0}",
-
-						bookingId
-					));
-
-
-				// Refresh booking table
-				LoadBookings();
-
-
-				// Clear fields
-				ClearFields();
-			}
-
-			catch (System::Exception^ ex)
-			{
-				MessageBox::Show(
-					ex->Message,
-					"Booking failed");
-			}
-		}
-
-
-
-		// =====================================================
-		// CALCULATE BOOKING TOTAL
-		// =====================================================
-
-		void CalculateBookingTotal()
-		{
-			// Reset total first
-			lblTotalAmount->Text =
-				"Rs. 0.00";
-
-
-			int roomNumber;
-
-
-			// Check whether room number is valid
-			if (!Int32::TryParse(
-				textBox4->Text,
-				roomNumber))
-			{
-				return;
-			}
-
-
-			if (roomNumber <= 0)
-			{
-				return;
-			}
-
-
-			// Get dates
-			DateTime checkIn =
-				dateTimePicker1->Value.Date;
-
-
-			DateTime checkOut =
-				dateTimePicker2->Value.Date;
-
-
-			// Calculate number of nights
-			int nights =
-				(checkOut - checkIn).Days;
-
-
-			// Checkout must be after check-in
-			if (nights <= 0)
-			{
-				lblTotalAmount->Text =
-					"Rs. 0.00";
-
-				return;
-			}
-
-
-			try
-			{
-				HotelService^ backend =
-					gcnew HotelService();
-
-
-				// Get rooms from database
-				DataTable^ rooms =
-					backend->GetRooms();
-
-
-				bool roomFound =
-					false;
-
-
-				for each (
-					DataRow ^ row
-					in rooms->Rows)
-				{
-					int databaseRoomNumber =
-						Convert::ToInt32(
-							row["Room_id"]);
-
-
-					// Find entered room number
-					if (databaseRoomNumber
-						==
-						roomNumber)
-					{
-						roomFound =
-							true;
-
-
-						// Get room type
-						String^ roomType =
-							Convert::ToString(
-								row["type"]);
-
-
-						// Automatically show room type
-						if (roomType == "Single")
-						{
-							comboBox1->SelectedIndex = 0;
-						}
-
-						else if (roomType == "Double")
-						{
-							comboBox1->SelectedIndex = 1;
-						}
-
-						else if (roomType == "Suite")
-						{
-							comboBox1->SelectedIndex = 2;
-						}
-
-
-						// Get room price
-						Decimal roomPrice;
-
-
-						bool validPrice =
-							Decimal::TryParse(
-
-								Convert::ToString(
-									row["price"]),
-
-								System::Globalization::
-								NumberStyles::Number,
-
-								System::Globalization::
-								CultureInfo::InvariantCulture,
-
-								roomPrice
-							);
-
-
-						if (!validPrice)
-						{
-							lblTotalAmount->Text =
-								"Rs. 0.00";
-
-							return;
-						}
-
-
-						// Total =
-						// room price × nights
-						Decimal total =
-							roomPrice *
-							Decimal(nights);
-
-
-						// Show calculated price
-						lblTotalAmount->Text =
-							"Rs. " +
-							total.ToString("0.00");
-
-
-						return;
-					}
-				}
-
-
-				if (!roomFound)
-				{
-					comboBox1->SelectedIndex =
-						-1;
-
-					lblTotalAmount->Text =
-						"Rs. 0.00";
-				}
-			}
-
-			catch (System::Exception^)
-			{
-				lblTotalAmount->Text =
-					"Rs. 0.00";
-			}
-		}
-
-
-
-		// =====================================================
-		// CALCULATE TOTAL WHEN DETAILS CHANGE
-		// =====================================================
-
-		System::Void BookingDetailsChanged(
-			System::Object^ sender,
-			System::EventArgs^ e)
-		{
-			CalculateBookingTotal();
-		}
-
-
-
-		// =====================================================
-		// LOAD BOOKINGS FROM DATABASE
-		// =====================================================
-
-		void LoadBookings()
-		{
-			try
-			{
-				HotelService^ backend =
-					gcnew HotelService();
-
-
-				System::Data::DataTable^ bookings =
-					backend->GetBookings();
-
-
-				dgvRooms->DataSource =
-					nullptr;
-
-
-				dgvRooms->Columns->Clear();
-
-
-				dgvRooms->AutoGenerateColumns =
-					true;
-
-
-				dgvRooms->DataSource =
-					bookings;
-
-
-				dgvRooms->Columns[
-					"booking_id"]
-					->HeaderText =
-					"Booking ID";
-
-
-				dgvRooms->Columns[
-					"guest_name"]
-					->HeaderText =
-					"Guest Name";
-
-
-				dgvRooms->Columns[
-					"room_id"]
-					->HeaderText =
-					"Room";
-
-
-				dgvRooms->Columns[
-					"check_in"]
-					->HeaderText =
-					"Check-in";
-
-
-				dgvRooms->Columns[
-					"check_out"]
-					->HeaderText =
-					"Check-out";
-
-
-				dgvRooms->Columns[
-					"nights"]
-					->HeaderText =
-					"Nights";
-
-
-				dgvRooms->Columns[
-					"total_amount"]
-					->HeaderText =
-					"Total";
-
-
-				dgvRooms->Columns[
-					"status"]
-					->HeaderText =
-					"Status";
-
-
-				dgvRooms->Columns[
-					"check_in"]
-					->DefaultCellStyle
-					->Format =
-					"yyyy-MM-dd";
-
-
-				dgvRooms->Columns[
-					"check_out"]
-					->DefaultCellStyle
-					->Format =
-					"yyyy-MM-dd";
-
-
-				dgvRooms->ReadOnly =
-					true;
-
-
-				dgvRooms->AllowUserToAddRows =
-					false;
-
-
-				dgvRooms->AllowUserToDeleteRows =
-					false;
-
-
-				dgvRooms->MultiSelect =
-					false;
-
-
-				dgvRooms->SelectionMode =
-					DataGridViewSelectionMode::
-					FullRowSelect;
-			}
-
-			catch (System::Exception^ ex)
-			{
-				MessageBox::Show(
-					ex->Message,
-					"Could not refresh booking list");
-			}
-		}
-
-
-
-		// =====================================================
-		// CLEAR BOOKING FIELDS
-		// =====================================================
-
-		void ClearFields()
-		{
-			textBox1->Clear();
-
-			textBox2->Clear();
-
-			textBox3->Clear();
-
-			textBox4->Clear();
-
-
-			comboBox1->SelectedIndex =
-				-1;
-
-
-			lblTotalAmount->Text =
-				"Rs. 0.00";
-
-
-			textBox1->Focus();
-		}
-
-
 
 	protected:
-
 		~MyForm1()
 		{
 			if (components)
@@ -478,82 +47,34 @@ namespace CODEBASESTAY
 			}
 		}
 
-
-
 	private:
-
 		System::Windows::Forms::Label^ label1;
-
 		System::Windows::Forms::Panel^ panel1;
-
 		System::Windows::Forms::Label^ label8;
-
 		System::Windows::Forms::Label^ label7;
-
 		System::Windows::Forms::Label^ label5;
-
 		System::Windows::Forms::Label^ label4;
-
 		System::Windows::Forms::Label^ label3;
-
 		System::Windows::Forms::Label^ label2;
-
 		System::Windows::Forms::TextBox^ textBox1;
-
 		System::Windows::Forms::DateTimePicker^ dateTimePicker2;
-
 		System::Windows::Forms::DateTimePicker^ dateTimePicker1;
-
 		System::Windows::Forms::TextBox^ textBox3;
-
 		System::Windows::Forms::TextBox^ textBox2;
-
 		System::Windows::Forms::Panel^ panel2;
-
 		System::Windows::Forms::Label^ label9;
-
 		System::Windows::Forms::DataGridView^ dgvRooms;
-
-		System::Windows::Forms::DataGridViewTextBoxColumn^ Type;
-
-		System::Windows::Forms::DataGridViewTextBoxColumn^ Price;
-
-		System::Windows::Forms::DataGridViewTextBoxColumn^ Stt;
-
-		System::Windows::Forms::DataGridViewTextBoxColumn^ checkin;
-
-		System::Windows::Forms::DataGridViewTextBoxColumn^ checkout;
-
 		System::Windows::Forms::Button^ button1;
-
 		System::Windows::Forms::ComboBox^ comboBox1;
-
 		System::Windows::Forms::Label^ label10;
-
 		System::Windows::Forms::TextBox^ textBox4;
-
 		System::Windows::Forms::Label^ label6;
-
 		System::Windows::Forms::Label^ label11;
-
 		System::Windows::Forms::Button^ button2;
-
-
-		// THIS IS YOUR TOTAL PRICE LABEL
 		System::Windows::Forms::Label^ lblTotalAmount;
-
-
-	protected:
-
-
-	private:
-
 		System::ComponentModel::Container^ components;
 
-
-
 #pragma region Windows Form Designer generated code
-
 
 		void InitializeComponent(void)
 		{
@@ -605,21 +126,6 @@ namespace CODEBASESTAY
 			this->dgvRooms =
 				(gcnew System::Windows::Forms::DataGridView());
 
-			this->Type =
-				(gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-
-			this->Price =
-				(gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-
-			this->Stt =
-				(gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-
-			this->checkin =
-				(gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-
-			this->checkout =
-				(gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-
 			this->label9 =
 				(gcnew System::Windows::Forms::Label());
 
@@ -644,27 +150,16 @@ namespace CODEBASESTAY
 			this->lblTotalAmount =
 				(gcnew System::Windows::Forms::Label());
 
-
 			this->panel1->SuspendLayout();
-
 			this->panel2->SuspendLayout();
-
 
 			(cli::safe_cast<
 				System::ComponentModel::ISupportInitialize^>
 				(this->dgvRooms))->BeginInit();
 
-
 			this->SuspendLayout();
 
-
-
-			// ==================================================
-			// MAIN TITLE
-			// ==================================================
-
-			this->label1->AutoSize =
-				true;
+			this->label1->AutoSize = true;
 
 			this->label1->Font =
 				(gcnew System::Drawing::Font(
@@ -692,18 +187,11 @@ namespace CODEBASESTAY
 			this->label1->Text =
 				L"Booking Management";
 
-
-
-			// ==================================================
-			// BOOKING DETAILS PANEL
-			// ==================================================
-
 			this->panel1->AutoScroll =
 				true;
 
 			this->panel1->BackColor =
 				System::Drawing::Color::White;
-
 
 			this->panel1->Controls->Add(
 				this->lblTotalAmount);
@@ -759,7 +247,6 @@ namespace CODEBASESTAY
 			this->panel1->Controls->Add(
 				this->label2);
 
-
 			this->panel1->Cursor =
 				System::Windows::Forms::Cursors::Hand;
 
@@ -780,17 +267,14 @@ namespace CODEBASESTAY
 			this->panel1->TabIndex =
 				1;
 
-
-
-			// ==================================================
-			// BOOK BUTTON
-			// ==================================================
-
 			this->button1->BackColor =
 				System::Drawing::Color::Green;
 
 			this->button1->ForeColor =
 				System::Drawing::Color::Black;
+
+			this->button1->FlatStyle =
+				System::Windows::Forms::FlatStyle::Flat;
 
 			this->button1->Location =
 				System::Drawing::Point(
@@ -812,12 +296,6 @@ namespace CODEBASESTAY
 			this->button1->UseVisualStyleBackColor =
 				false;
 
-
-
-			// ==================================================
-			// CHECK-OUT DATE
-			// ==================================================
-
 			this->dateTimePicker2->Cursor =
 				System::Windows::Forms::Cursors::Hand;
 
@@ -831,6 +309,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					641, 224);
 
+			this->dateTimePicker2->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->dateTimePicker2->Name =
 				L"dateTimePicker2";
 
@@ -840,12 +322,6 @@ namespace CODEBASESTAY
 
 			this->dateTimePicker2->TabIndex =
 				14;
-
-
-
-			// ==================================================
-			// CHECK-IN DATE
-			// ==================================================
 
 			this->dateTimePicker1->Cursor =
 				System::Windows::Forms::Cursors::Hand;
@@ -860,6 +336,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					641, 142);
 
+			this->dateTimePicker1->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->dateTimePicker1->Name =
 				L"dateTimePicker1";
 
@@ -869,12 +349,6 @@ namespace CODEBASESTAY
 
 			this->dateTimePicker1->TabIndex =
 				13;
-
-
-
-			// ==================================================
-			// NIC
-			// ==================================================
 
 			this->textBox3->Cursor =
 				System::Windows::Forms::Cursors::Hand;
@@ -889,6 +363,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					166, 208);
 
+			this->textBox3->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->textBox3->Name =
 				L"textBox3";
 
@@ -898,12 +376,6 @@ namespace CODEBASESTAY
 
 			this->textBox3->TabIndex =
 				9;
-
-
-
-			// ==================================================
-			// PHONE NUMBER
-			// ==================================================
 
 			this->textBox2->Cursor =
 				System::Windows::Forms::Cursors::Hand;
@@ -918,6 +390,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					166, 144);
 
+			this->textBox2->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->textBox2->Name =
 				L"textBox2";
 
@@ -927,12 +403,6 @@ namespace CODEBASESTAY
 
 			this->textBox2->TabIndex =
 				8;
-
-
-
-			// ==================================================
-			// GUEST NAME
-			// ==================================================
 
 			this->textBox1->Cursor =
 				System::Windows::Forms::Cursors::Hand;
@@ -947,6 +417,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					163, 64);
 
+			this->textBox1->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->textBox1->Name =
 				L"textBox1";
 
@@ -957,14 +431,11 @@ namespace CODEBASESTAY
 			this->textBox1->TabIndex =
 				7;
 
-
-
-			// ==================================================
-			// CHECK-OUT LABEL
-			// ==================================================
-
 			this->label8->AutoSize =
 				true;
+
+			this->label8->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label8->Font =
 				(gcnew System::Drawing::Font(
@@ -979,17 +450,17 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					494, 226);
 
+			this->label8->Name =
+				L"label8";
+
 			this->label8->Text =
 				L"Check-out Date:";
 
-
-
-			// ==================================================
-			// CHECK-IN LABEL
-			// ==================================================
-
 			this->label7->AutoSize =
 				true;
+
+			this->label7->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label7->Font =
 				(gcnew System::Drawing::Font(
@@ -1004,17 +475,17 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					494, 140);
 
+			this->label7->Name =
+				L"label7";
+
 			this->label7->Text =
 				L"Check-in Date:";
 
-
-
-			// ==================================================
-			// NIC LABEL
-			// ==================================================
-
 			this->label5->AutoSize =
 				true;
+
+			this->label5->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label5->Font =
 				(gcnew System::Drawing::Font(
@@ -1029,17 +500,17 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					24, 208);
 
+			this->label5->Name =
+				L"label5";
+
 			this->label5->Text =
 				L"NIC :";
 
-
-
-			// ==================================================
-			// PHONE LABEL
-			// ==================================================
-
 			this->label4->AutoSize =
 				true;
+
+			this->label4->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label4->Font =
 				(gcnew System::Drawing::Font(
@@ -1054,17 +525,17 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					21, 140);
 
+			this->label4->Name =
+				L"label4";
+
 			this->label4->Text =
 				L"Phone Number :";
 
-
-
-			// ==================================================
-			// GUEST NAME LABEL
-			// ==================================================
-
 			this->label3->AutoSize =
 				true;
+
+			this->label3->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label3->Font =
 				(gcnew System::Drawing::Font(
@@ -1079,14 +550,11 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					21, 64);
 
+			this->label3->Name =
+				L"label3";
+
 			this->label3->Text =
 				L"Guest Name :";
-
-
-
-			// ==================================================
-			// BOOKING DETAILS TITLE
-			// ==================================================
 
 			this->label2->AutoSize =
 				true;
@@ -1104,14 +572,11 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					14, 13);
 
+			this->label2->Name =
+				L"label2";
+
 			this->label2->Text =
 				L"Booking Details";
-
-
-
-			// ==================================================
-			// BOOKING LIST PANEL
-			// ==================================================
 
 			this->panel2->BackColor =
 				System::Drawing::Color::White;
@@ -1136,22 +601,27 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					1021, 316);
 
-
-
-			// ==================================================
-			// BOOKING TABLE
-			// ==================================================
+			this->panel2->TabIndex =
+				2;
 
 			this->dgvRooms->AllowUserToAddRows =
 				false;
 
+			this->dgvRooms->AllowUserToDeleteRows =
+				false;
+
+			this->dgvRooms->AutoGenerateColumns =
+				true;
+
 			this->dgvRooms->AutoSizeColumnsMode =
+				System::Windows::Forms::
 				DataGridViewAutoSizeColumnsMode::Fill;
 
 			this->dgvRooms->BackgroundColor =
 				System::Drawing::Color::White;
 
 			this->dgvRooms->BorderStyle =
+				System::Windows::Forms::
 				BorderStyle::None;
 
 			this->dgvRooms->ColumnHeadersHeight =
@@ -1180,6 +650,7 @@ namespace CODEBASESTAY
 				24;
 
 			this->dgvRooms->SelectionMode =
+				System::Windows::Forms::
 				DataGridViewSelectionMode::
 				FullRowSelect;
 
@@ -1187,11 +658,8 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					933, 201);
 
-
-
-			// ==================================================
-			// BOOKING LIST TITLE
-			// ==================================================
+			this->dgvRooms->TabIndex =
+				2;
 
 			this->label9->AutoSize =
 				true;
@@ -1209,29 +677,27 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					14, 14);
 
+			this->label9->Name =
+				L"label9";
+
 			this->label9->Text =
 				L"Booking List";
 
-
-
-			// ==================================================
-			// ROOM TYPE
-			// ==================================================
-
 			this->comboBox1->DropDownStyle =
+				System::Windows::Forms::
 				ComboBoxStyle::DropDownList;
 
 			this->comboBox1->FormattingEnabled =
 				true;
 
 			this->comboBox1->Items->AddRange(
-				gcnew cli::array<System::Object^>(3)
+				gcnew cli::array<
+				System::Object^>(3)
 			{
 				L"Single",
 					L"Double",
 					L"Suite"
 			});
-
 
 			this->comboBox1->Location =
 				System::Drawing::Point(
@@ -1244,11 +710,8 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					308, 31);
 
-
-
-			// ==================================================
-			// ROOM TYPE LABEL
-			// ==================================================
+			this->comboBox1->TabIndex =
+				17;
 
 			this->label10->AutoSize =
 				true;
@@ -1266,14 +729,11 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					20, 278);
 
+			this->label10->Name =
+				L"label10";
+
 			this->label10->Text =
 				L"Room Type :";
-
-
-
-			// ==================================================
-			// ROOM NUMBER
-			// ==================================================
 
 			this->textBox4->Cursor =
 				System::Windows::Forms::Cursors::Hand;
@@ -1288,6 +748,10 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					640, 68);
 
+			this->textBox4->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
+
 			this->textBox4->Name =
 				L"textBox4";
 
@@ -1295,14 +759,14 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					308, 27);
 
-
-
-			// ==================================================
-			// ROOM NUMBER LABEL
-			// ==================================================
+			this->textBox4->TabIndex =
+				10;
 
 			this->label6->AutoSize =
 				true;
+
+			this->label6->Cursor =
+				System::Windows::Forms::Cursors::Hand;
 
 			this->label6->Font =
 				(gcnew System::Drawing::Font(
@@ -1317,20 +781,20 @@ namespace CODEBASESTAY
 				System::Drawing::Point(
 					494, 64);
 
+			this->label6->Name =
+				L"label6";
+
 			this->label6->Text =
 				L"Room No:";
-
-
-
-			// ==================================================
-			// DELETE BUTTON
-			// ==================================================
 
 			this->button2->BackColor =
 				System::Drawing::Color::Green;
 
 			this->button2->ForeColor =
 				System::Drawing::Color::Black;
+
+			this->button2->FlatStyle =
+				System::Windows::Forms::FlatStyle::Flat;
 
 			this->button2->Location =
 				System::Drawing::Point(
@@ -1343,17 +807,14 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					150, 47);
 
+			this->button2->TabIndex =
+				16;
+
 			this->button2->Text =
 				L"Delete";
 
 			this->button2->UseVisualStyleBackColor =
 				false;
-
-
-
-			// ==================================================
-			// TOTAL LABEL
-			// ==================================================
 
 			this->label11->AutoSize =
 				true;
@@ -1377,13 +838,6 @@ namespace CODEBASESTAY
 			this->label11->Text =
 				L"Total:";
 
-
-
-			// ==================================================
-			// TOTAL PRICE
-			// lblTotalAmount
-			// ==================================================
-
 			this->lblTotalAmount->AutoSize =
 				true;
 
@@ -1406,12 +860,6 @@ namespace CODEBASESTAY
 			this->lblTotalAmount->Text =
 				L"Rs. 0.00";
 
-
-
-			// ==================================================
-			// FORM
-			// ==================================================
-
 			this->AutoScaleDimensions =
 				System::Drawing::SizeF(
 					10, 23);
@@ -1430,7 +878,6 @@ namespace CODEBASESTAY
 				System::Drawing::Size(
 					1098, 766);
 
-
 			this->Controls->Add(
 				this->panel2);
 
@@ -1440,48 +887,44 @@ namespace CODEBASESTAY
 			this->Controls->Add(
 				this->label1);
 
-
 			this->Font =
 				(gcnew System::Drawing::Font(
 					L"Segoe UI",
 					10.2F,
 					System::Drawing::FontStyle::Bold));
 
-
 			this->ForeColor =
 				System::Drawing::Color::DarkGreen;
 
+			this->Margin =
+				System::Windows::Forms::Padding(
+					3, 5, 3, 5);
 
 			this->Name =
 				L"MyForm1";
 
-
 			this->Text =
 				L"Booking";
-
 
 			this->Load +=
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::MyForm1_Load);
 
-
 			this->panel1->ResumeLayout(
 				false);
 
 			this->panel1->PerformLayout();
-
 
 			this->panel2->ResumeLayout(
 				false);
 
 			this->panel2->PerformLayout();
 
-
 			(cli::safe_cast<
-				System::ComponentModel::ISupportInitialize^>
+				System::ComponentModel::
+				ISupportInitialize^>
 				(this->dgvRooms))->EndInit();
-
 
 			this->ResumeLayout(
 				false);
@@ -1489,36 +932,352 @@ namespace CODEBASESTAY
 			this->PerformLayout();
 		}
 
-
 #pragma endregion
 
+	private:
+		System::Void Book_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			int roomNumber;
 
+			if (!System::Int32::TryParse(
+				textBox4->Text,
+				roomNumber)
+				||
+				roomNumber <= 0)
+			{
+				MessageBox::Show(
+					"Enter a valid room number.");
 
-		// =====================================================
-		// FORM LOAD
-		// =====================================================
+				return;
+			}
+
+			if (dateTimePicker2->Value.Date <=
+				dateTimePicker1->Value.Date)
+			{
+				MessageBox::Show(
+					"Check-out date must be after check-in date.");
+
+				return;
+			}
+
+			try
+			{
+				HotelService^ backend =
+					gcnew HotelService();
+
+				int bookingId =
+					backend->CreateBooking(
+						textBox1->Text,
+						textBox2->Text,
+						textBox3->Text,
+						roomNumber,
+						dateTimePicker1->Value,
+						dateTimePicker2->Value);
+
+				MessageBox::Show(
+					System::String::Format(
+						"Booking saved successfully!\nBooking ID: {0}",
+						bookingId));
+
+				LoadBookings();
+
+				ClearFields();
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(
+					ex->Message,
+					"Booking failed");
+			}
+		}
 
 	private:
+		void CalculateBookingTotal()
+		{
+			lblTotalAmount->Text =
+				"Rs. 0.00";
 
+			comboBox1->SelectedIndex =
+				-1;
+
+			int roomNumber;
+
+			if (!System::Int32::TryParse(
+				textBox4->Text,
+				roomNumber))
+			{
+				return;
+			}
+
+			if (roomNumber <= 0)
+			{
+				return;
+			}
+
+			System::DateTime checkIn =
+				dateTimePicker1->Value.Date;
+
+			System::DateTime checkOut =
+				dateTimePicker2->Value.Date;
+
+			int nights =
+				(checkOut - checkIn).Days;
+
+			if (nights <= 0)
+			{
+				return;
+			}
+
+			try
+			{
+				HotelService^ backend =
+					gcnew HotelService();
+
+				System::Data::DataTable^ rooms =
+					backend->GetRooms();
+
+				for each (
+					System::Data::DataRow ^ row
+					in rooms->Rows)
+				{
+					int databaseRoomNumber =
+						System::Convert::ToInt32(
+							row["Room_id"]);
+
+					if (databaseRoomNumber ==
+						roomNumber)
+					{
+						System::String^ roomType =
+							System::Convert::ToString(
+								row["type"]);
+
+						if (roomType == "Single")
+						{
+							comboBox1->SelectedIndex =
+								0;
+						}
+						else if (
+							roomType->Trim() ==
+							"Double")
+						{
+							comboBox1->SelectedIndex =
+								1;
+						}
+						else if (
+							roomType == "Suite")
+						{
+							comboBox1->SelectedIndex =
+								2;
+						}
+
+						System::Decimal roomPrice;
+
+						bool validPrice =
+							System::Decimal::TryParse(
+								System::Convert::ToString(
+									row["price"]),
+								System::Globalization::
+								NumberStyles::Number,
+								System::Globalization::
+								CultureInfo::
+								InvariantCulture,
+								roomPrice);
+
+						if (!validPrice)
+						{
+							return;
+						}
+
+						System::Decimal total =
+							System::Decimal::Multiply(
+								roomPrice,
+								System::Decimal(nights));
+
+						lblTotalAmount->Text =
+							"Rs. " +
+							total.ToString("0.00");
+
+						return;
+					}
+				}
+			}
+			catch (System::Exception^)
+			{
+				lblTotalAmount->Text =
+					"Rs. 0.00";
+			}
+		}
+
+	private:
+		System::Void BookingDetailsChanged(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			CalculateBookingTotal();
+		}
+
+	private:
+		void LoadBookings()
+		{
+			try
+			{
+				HotelService^ backend =
+					gcnew HotelService();
+
+				System::Data::DataTable^ bookings =
+					backend->GetBookings();
+
+				dgvRooms->DataSource =
+					nullptr;
+
+				dgvRooms->Columns->Clear();
+
+				dgvRooms->AutoGenerateColumns =
+					true;
+
+				dgvRooms->DataSource =
+					bookings;
+
+				if (dgvRooms->Columns[
+					"booking_id"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"booking_id"]
+						->HeaderText =
+						"Booking ID";
+				}
+
+				if (dgvRooms->Columns[
+					"guest_name"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"guest_name"]
+						->HeaderText =
+						"Guest Name";
+				}
+
+				if (dgvRooms->Columns[
+					"room_id"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"room_id"]
+						->HeaderText =
+						"Room No";
+				}
+
+				if (dgvRooms->Columns[
+					"check_in"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"check_in"]
+						->HeaderText =
+						"Check-in";
+
+					dgvRooms->Columns[
+						"check_in"]
+						->DefaultCellStyle
+						->Format =
+						"yyyy-MM-dd";
+				}
+
+				if (dgvRooms->Columns[
+					"check_out"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"check_out"]
+						->HeaderText =
+						"Check-out";
+
+					dgvRooms->Columns[
+						"check_out"]
+						->DefaultCellStyle
+						->Format =
+						"yyyy-MM-dd";
+				}
+
+				if (dgvRooms->Columns[
+					"nights"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"nights"]
+						->HeaderText =
+						"Nights";
+				}
+
+				if (dgvRooms->Columns[
+					"total_amount"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"total_amount"]
+						->HeaderText =
+						"Total";
+				}
+
+				if (dgvRooms->Columns[
+					"status"] != nullptr)
+				{
+					dgvRooms->Columns[
+						"status"]
+						->HeaderText =
+						"Status";
+				}
+
+				dgvRooms->ReadOnly =
+					true;
+
+				dgvRooms->AllowUserToAddRows =
+					false;
+
+				dgvRooms->AllowUserToDeleteRows =
+					false;
+
+				dgvRooms->MultiSelect =
+					false;
+
+				dgvRooms->SelectionMode =
+					System::Windows::Forms::
+					DataGridViewSelectionMode::
+					FullRowSelect;
+
+				dgvRooms->AutoSizeColumnsMode =
+					System::Windows::Forms::
+					DataGridViewAutoSizeColumnsMode::
+					Fill;
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(
+					ex->Message,
+					"Could not refresh booking list");
+			}
+		}
+
+	private:
+		void ClearFields()
+		{
+			textBox1->Clear();
+			textBox2->Clear();
+			textBox3->Clear();
+			textBox4->Clear();
+
+			comboBox1->SelectedIndex =
+				-1;
+
+			lblTotalAmount->Text =
+				"Rs. 0.00";
+
+			textBox1->Focus();
+		}
+
+	private:
 		System::Void MyForm1_Load(
 			System::Object^ sender,
 			System::EventArgs^ e)
 		{
 			LoadBookings();
-
 			CalculateBookingTotal();
 		}
-
-
-
-	private:
-
-		System::Void label5_Click(
-			System::Object^ sender,
-			System::EventArgs^ e)
-		{
-		}
-
-
 	};
 }
