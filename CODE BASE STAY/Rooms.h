@@ -587,6 +587,7 @@ namespace CODEBASESTAY {
 			   this->label4->Size = System::Drawing::Size(110, 23);
 			   this->label4->TabIndex = 2;
 			   this->label4->Text = L"Room Type :";
+			   this->label4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			   // 
 			   // label3
 			   // 
@@ -766,6 +767,8 @@ private: System::Void Enter(System::Object^ sender, System::Windows::Forms::KeyP
 	if (e->KeyChar == '.' && txt->Text->Contains(".")) {
 		e->Handled = true;
 	}
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

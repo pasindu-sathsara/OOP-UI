@@ -17,7 +17,7 @@ namespace CODEBASESTAY {
             settings->Port = 3306;
             settings->Database = "hotelmanagement_sys";
             settings->UserID = "root";
-            settings->Password = "1234";
+            settings->Password = "root";
 
             MySqlConnection^ connection =
                 gcnew MySqlConnection(settings->ConnectionString);
@@ -59,7 +59,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -113,7 +113,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -165,7 +165,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -205,7 +205,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -263,7 +263,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -378,7 +378,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -426,7 +426,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
@@ -480,7 +480,7 @@ namespace CODEBASESTAY {
         settings->Port = 3306;
         settings->Database = "hotelmanagement_sys";
         settings->UserID = "root";
-        settings->Password = "1234";
+        settings->Password = "root";
 
         MySqlConnection^ connection =
             gcnew MySqlConnection(settings->ConnectionString);
