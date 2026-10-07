@@ -129,6 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector NET 26.7\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -150,6 +153,7 @@
     <ClInclude Include="Booking.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="HotelService.h" />
     <ClInclude Include="Rooms.h">
       <FileType>CppForm</FileType>
     </ClInclude>

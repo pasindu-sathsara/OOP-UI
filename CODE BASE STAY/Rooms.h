@@ -1,4 +1,5 @@
 #pragma once
+#include "HotelService.h"
 
 namespace CODEBASESTAY {
 
@@ -15,7 +16,262 @@ namespace CODEBASESTAY {
 		MyForm(void)
 		{
 			InitializeComponent();
+
+			btnAddRoom->Click += gcnew System::EventHandler(
+				this, &MyForm::btnAddRoom_Click);
+			btnUpdate->Click += gcnew System::EventHandler(
+				this, &MyForm::btnUpdate_Click);
+			btnDelete->Click += gcnew System::EventHandler(
+				this, &MyForm::btnDelete_Click);
+			dgvRooms->CellClick += gcnew
+				System::Windows::Forms::DataGridViewCellEventHandler(
+					this, &MyForm::RoomList_CellClick);
 		}
+	
+	private:
+		System::Void btnAddRoom_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			int roomNumber;
+			System::Decimal price;
+
+			if (!System::Int32::TryParse(
+				textBox1->Text, roomNumber) || roomNumber <= 0)
+			{
+				MessageBox::Show("Enter a valid positive room number.");
+				return;
+			}
+
+			if (!System::Decimal::TryParse(
+				textBox2->Text, price) ||
+				price <= System::Decimal(0))
+			{
+				MessageBox::Show("Enter a valid positive price.");
+				return;
+			}
+
+			if (comboBox1->SelectedIndex < 0 ||
+				comboBox2->SelectedIndex < 0)
+			{
+				MessageBox::Show("Select a room type and status.");
+				return;
+			}
+
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+
+				backend->AddRoom(
+					roomNumber,
+					comboBox1->SelectedItem->ToString()->Trim(),
+					price,
+					comboBox2->SelectedItem->ToString()->Trim());
+
+				MessageBox::Show("Room saved successfully!");
+			}
+			catch (MySql::Data::MySqlClient::MySqlException^ ex)
+			{
+				if (ex->Number == 1062)
+				{
+					MessageBox::Show(
+						"That room number already exists.");
+				}
+				else
+				{
+					MessageBox::Show(ex->Message, "Database error");
+				}
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Error");
+			}
+		}
+
+	/*private:*/
+		System::Void btnUpdate_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			int roomNumber;
+			System::Decimal price;
+
+			if (!System::Int32::TryParse(
+				textBox1->Text, roomNumber) || roomNumber <= 0)
+			{
+				MessageBox::Show("Enter the room number to update.");
+				return;
+			}
+
+			if (!System::Decimal::TryParse(
+				textBox2->Text, price) ||
+				price <= System::Decimal(0))
+			{
+				MessageBox::Show("Enter a valid positive price.");
+				return;
+			}
+
+			if (comboBox1->SelectedIndex < 0 ||
+				comboBox2->SelectedIndex < 0)
+			{
+				MessageBox::Show("Select a room type and status.");
+				return;
+			}
+
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+
+				bool updated = backend->UpdateRoom(
+					roomNumber,
+					comboBox1->SelectedItem->ToString()->Trim(),
+					price,
+					comboBox2->SelectedItem->ToString()->Trim());
+
+				if (updated)
+				{
+					MessageBox::Show("Room updated successfully!");
+					LoadRooms();
+				}
+				else
+				{
+					MessageBox::Show(
+						"No update reported. Check that the room exists "
+						"and whether its values are already the same.");
+				}
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Update failed");
+			}
+		}
+
+		System::Void btnDelete_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			int roomNumber;
+
+			if (!System::Int32::TryParse(
+				textBox1->Text, roomNumber) || roomNumber <= 0)
+			{
+				MessageBox::Show("Enter the room number to delete.");
+				return;
+			}
+
+			System::Windows::Forms::DialogResult answer =
+				MessageBox::Show(
+					System::String::Format(
+						"Delete room {0}?", roomNumber),
+					"Confirm deletion",
+					MessageBoxButtons::YesNo,
+					MessageBoxIcon::Question);
+
+			if (answer != System::Windows::Forms::DialogResult::Yes)
+				return;
+
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+
+				if (backend->DeleteRoom(roomNumber))
+				{
+					MessageBox::Show("Room deleted successfully!");
+					textBox1->Clear();
+					textBox2->Clear();
+					comboBox1->SelectedIndex = -1;
+					comboBox2->SelectedIndex = -1;
+				}
+				else
+				{
+					MessageBox::Show("That room number was not found.");
+				}
+			}
+			catch (MySql::Data::MySqlClient::MySqlException^ ex)
+			{
+				if (ex->Number == 1451)
+				{
+					MessageBox::Show(
+						"This room is linked to a reservation "
+						"and cannot be deleted.");
+				}
+				else
+				{
+					MessageBox::Show(ex->Message, "Delete failed");
+				}
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Delete failed");
+			}
+		}
+
+		void LoadRooms()
+		{
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+				System::Data::DataTable^ rooms = backend->GetRooms();
+
+				dgvRooms->DataSource = nullptr;
+				dgvRooms->Columns->Clear();
+				dgvRooms->AutoGenerateColumns = true;
+				dgvRooms->DataSource = rooms;
+
+				dgvRooms->Columns["Room_id"]->HeaderText = "Room Number";
+				dgvRooms->Columns["type"]->HeaderText = "Type";
+				dgvRooms->Columns["price"]->HeaderText = "Price";
+				dgvRooms->Columns["status"]->HeaderText = "Status";
+
+				dgvRooms->ReadOnly = true;
+				dgvRooms->AllowUserToAddRows = false;
+				dgvRooms->AllowUserToDeleteRows = false;
+				dgvRooms->MultiSelect = false;
+				dgvRooms->SelectionMode =
+					DataGridViewSelectionMode::FullRowSelect;
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Could not refresh room list");
+			}
+		}
+
+		System::Void RoomList_CellClick(
+			System::Object^ sender,
+			System::Windows::Forms::DataGridViewCellEventArgs^ e)
+		{
+			if (e->RowIndex < 0)
+				return;
+
+			DataGridViewRow^ row = dgvRooms->Rows[e->RowIndex];
+
+			textBox1->Text =
+				System::Convert::ToString(row->Cells["Room_id"]->Value);
+
+			textBox2->Text =
+				System::Convert::ToString(row->Cells["price"]->Value);
+
+			comboBox1->SelectedIndex = -1;
+			comboBox2->SelectedIndex = -1;
+
+			System::String^ roomType =
+				System::Convert::ToString(row->Cells["type"]->Value)->Trim();
+
+			for (int i = 0; i < comboBox1->Items->Count; i++)
+			{
+				if (comboBox1->Items[i]->ToString()->Trim() == roomType)
+				{
+					comboBox1->SelectedIndex = i;
+					break;
+				}
+			}
+
+			comboBox2->SelectedItem =
+				System::Convert::ToString(row->Cells["status"]->Value)->Trim();
+		}
+
+	
+
 
 	protected:
 		~MyForm()
@@ -465,6 +721,7 @@ namespace CODEBASESTAY {
 	}
 
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		LoadRooms();
 	}
 	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}

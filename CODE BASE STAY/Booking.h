@@ -1,4 +1,5 @@
 #pragma once
+#include "HotelService.h"
 
 namespace CODEBASESTAY {
 
@@ -9,18 +10,93 @@ namespace CODEBASESTAY {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for MyForm1
-	/// </summary>
+	
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
 	public:
 		MyForm1(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			button1->Click += gcnew System::EventHandler(
+				this, &MyForm1::Book_Click);
+		}
+
+	private:
+		System::Void Book_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			int roomNumber;
+
+			if (!System::Int32::TryParse(
+				textBox4->Text, roomNumber) || roomNumber <= 0)
+			{
+				MessageBox::Show("Enter a valid room number.");
+				return;
+			}
+
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+
+				int bookingId = backend->CreateBooking(
+					textBox1->Text,
+					textBox2->Text,
+					textBox3->Text,
+					roomNumber,
+					dateTimePicker1->Value,
+					dateTimePicker2->Value);
+
+				MessageBox::Show(System::String::Format(
+					"Booking saved successfully!\nBooking ID: {0}",
+					bookingId));
+					LoadBookings();
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Booking failed");
+			}
+		}
+
+		void LoadBookings()
+		{
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+				System::Data::DataTable^ bookings =
+					backend->GetBookings();
+
+				dgvRooms->DataSource = nullptr;
+				dgvRooms->Columns->Clear();
+				dgvRooms->AutoGenerateColumns = true;
+				dgvRooms->DataSource = bookings;
+
+				dgvRooms->Columns["booking_id"]->HeaderText = "Booking ID";
+				dgvRooms->Columns["guest_name"]->HeaderText = "Guest Name";
+				dgvRooms->Columns["room_id"]->HeaderText = "Room";
+				dgvRooms->Columns["check_in"]->HeaderText = "Check-in";
+				dgvRooms->Columns["check_out"]->HeaderText = "Check-out";
+				dgvRooms->Columns["nights"]->HeaderText = "Nights";
+				dgvRooms->Columns["total_amount"]->HeaderText = "Total";
+				dgvRooms->Columns["status"]->HeaderText = "Status";
+
+				dgvRooms->Columns["check_in"]->DefaultCellStyle->Format =
+					"yyyy-MM-dd";
+				dgvRooms->Columns["check_out"]->DefaultCellStyle->Format =
+					"yyyy-MM-dd";
+
+				dgvRooms->ReadOnly = true;
+				dgvRooms->AllowUserToAddRows = false;
+				dgvRooms->AllowUserToDeleteRows = false;
+				dgvRooms->MultiSelect = false;
+				dgvRooms->SelectionMode =
+					DataGridViewSelectionMode::FullRowSelect;
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(
+					ex->Message, "Could not refresh booking list");
+			}
 		}
 
 	protected:
@@ -425,6 +501,7 @@ namespace CODEBASESTAY {
 		}
 #pragma endregion
 	private: System::Void MyForm1_Load(System::Object^ sender, System::EventArgs^ e) {
+		LoadBookings();
 	}
 	private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
 	}

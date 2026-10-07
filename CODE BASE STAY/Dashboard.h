@@ -1,5 +1,5 @@
 #pragma once
-
+#include "HotelService.h"
 #include "Rooms.h"
 #include "Booking.h"
 
@@ -26,6 +26,7 @@ namespace CODEBASESTAY {
 					80,
 					70
 				);
+
 		}
 
 	protected:
@@ -941,6 +942,11 @@ namespace CODEBASESTAY {
 
 			this->panelMainContent->Controls->Add(
 				this->pnlRecentBookings);
+
+			this->panelMainContent->Controls->Add(
+				this->pnlRecentBookings);
+
+			RefreshDashboard();
 		}
 
 
@@ -1065,6 +1071,53 @@ namespace CODEBASESTAY {
 			System::Object^ sender,
 			System::EventArgs^ e)
 		{
+			RefreshDashboard();
 		}
+
+		void RefreshDashboard()
+		{
+			try
+			{
+				HotelService^ backend = gcnew HotelService();
+				array<int>^ counts = backend->GetDashboardCounts();
+
+				lblTotalRoomsTitle->Text =
+					System::String::Format("Total Rooms: {0}", counts[0]);
+
+				lblOccupiedRoomsTitle->Text =
+					System::String::Format("Occupied Rooms: {0}", counts[1]);
+
+				lblTotalBookingsTitle->Text =
+					System::String::Format("Total Bookings: {0}", counts[2]);
+				
+				System::Data::DataTable^ recent =
+					backend->GetRecentBookings();
+
+				dataGridView1->DataSource = nullptr;
+				dataGridView1->Columns->Clear();
+				dataGridView1->AutoGenerateColumns = true;
+				dataGridView1->DataSource = recent;
+
+				dataGridView1->Columns["guest_name"]->HeaderText = "Guest Name";
+				dataGridView1->Columns["amount"]->HeaderText = "Amount";
+				dataGridView1->Columns["room"]->HeaderText = "Room";
+
+				dataGridView1->ReadOnly = true;
+				dataGridView1->AllowUserToAddRows = false;
+				dataGridView1->AllowUserToDeleteRows = false;
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Dashboard refresh failed");
+			}
+		}
+
+		System::Void Dashboard_Activated(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			RefreshDashboard();
+		}
+
 	};
 }
