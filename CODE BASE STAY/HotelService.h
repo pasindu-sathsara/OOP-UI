@@ -66,7 +66,7 @@ namespace CODEBASESTAY {
                 command->Parameters->Add(
                     "@type", MySqlDbType::VarChar)->Value = roomType;
 
-                // Your current database stores price as text.
+                
                 command->Parameters->Add(
                     "@price", MySqlDbType::VarChar)->Value =
                     price.ToString(
@@ -437,6 +437,38 @@ namespace CODEBASESTAY {
             finally
             {
                 delete adapter;
+            }
+        }
+        finally
+        {
+            delete connection;
+        }
+    }
+
+    bool DeleteBooking(int bookingId)
+    {
+        MySqlConnection^ connection = gcnew MySqlConnection(
+            DatabaseConfig::GetConnectionString());
+
+        try
+        {
+            connection->Open();
+
+            MySqlCommand^ command = gcnew MySqlCommand(
+                "DELETE FROM reservation "
+                "WHERE reservation_id = @id",
+                connection);
+
+            try
+            {
+                command->Parameters->Add(
+                    "@id", MySqlDbType::Int32)->Value = bookingId;
+
+                return command->ExecuteNonQuery() > 0;
+            }
+            finally
+            {
+                delete command;
             }
         }
         finally

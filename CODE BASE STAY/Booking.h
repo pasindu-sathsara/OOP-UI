@@ -36,6 +36,15 @@ namespace CODEBASESTAY
 				gcnew System::EventHandler(
 					this,
 					&MyForm1::BookingDetailsChanged);
+
+			this->button2->Click += gcnew System::EventHandler(
+				this, &MyForm1::DeleteBooking_Click);
+
+			this->dgvRooms->SelectionMode =
+				DataGridViewSelectionMode::FullRowSelect;
+
+			this->dgvRooms->MultiSelect = false;
+
 		}
 
 	protected:
@@ -990,6 +999,60 @@ namespace CODEBASESTAY
 				MessageBox::Show(
 					ex->Message,
 					"Booking failed");
+			}
+		}
+
+		System::Void DeleteBooking_Click(
+			System::Object^ sender,
+			System::EventArgs^ e)
+		{
+			if (dgvRooms->SelectedRows->Count == 0 ||
+				dgvRooms->SelectedRows[0]->IsNewRow)
+			{
+				MessageBox::Show("Select a booking row first.");
+				return;
+			}
+
+			try
+			{
+				int bookingId = System::Convert::ToInt32(
+					dgvRooms->SelectedRows[0]
+					->Cells["booking_id"]->Value);
+
+				System::Windows::Forms::DialogResult answer =
+					MessageBox::Show(
+						System::String::Format(
+							"Delete booking ID {0} permanently?",
+							bookingId),
+						"Confirm deletion",
+						MessageBoxButtons::YesNo,
+						MessageBoxIcon::Question,
+						MessageBoxDefaultButton::Button2);
+
+				if (answer !=
+					System::Windows::Forms::DialogResult::Yes)
+				{
+					return;
+				}
+
+				HotelService^ backend = gcnew HotelService();
+
+				bool deleted = backend->DeleteBooking(bookingId);
+
+				LoadBookings();
+
+				if (deleted)
+				{
+					MessageBox::Show("Booking deleted successfully!");
+				}
+				else
+				{
+					MessageBox::Show("That booking no longer exists.");
+				}
+			}
+			catch (System::Exception^ ex)
+			{
+				MessageBox::Show(ex->Message, "Delete failed");
 			}
 		}
 
