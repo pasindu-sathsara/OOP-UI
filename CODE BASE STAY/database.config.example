@@ -1,0 +1,1 @@
+Server=127.0.0.1;Port=3306;Database=hotelmanagement_sys;User ID=root;Password=YOUR_MYSQL_PASSWORD;
